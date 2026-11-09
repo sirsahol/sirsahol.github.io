@@ -1,0 +1,92 @@
+[
+  {
+    "id": "asset_1793717748",
+    "file": "src/assets/hero/obscure_1_clay.webp",
+    "style_preset": "clay-3d",
+    "original_prompt": "A thoughtful Black male systems architect with wireframe glasses sitting at a miniature workstation surrounded by clay servers and glowing clay network wires",
+    "enriched_prompt": "Hand-sculpted plasticine claymation model of A thoughtful Black male systems architect with wireframe glasses sitting at a miniature workstation surrounded by clay servers and glowing clay network wires, soft matte clay texture with subtle thumbprint marks, dual softbox studio lighting, warm physical contact shadows, clean plain ivory backdrop, Aardman stop-motion aesthetic, tactile physical craft.",
+    "negative_prompt": "glossy plastic, metallic reflections, airbrushed, CGI shine, sharp mechanical edges, flat drawing, digital render glare.",
+    "palette": [
+      "#E07A5F",
+      "#3D405A",
+      "#81B29A",
+      "#F4F1DE",
+      "#F2CC8F"
+    ],
+    "created_at": "2026-11-03T14:55:48.547200Z",
+    "crop_transparent": true,
+    "dual_theme": false
+  },
+  {
+    "id": "asset_1793717769",
+    "file": "src/assets/hero/obscure_2_cutaway.webp",
+    "style_preset": "cutaway-schematic",
+    "original_prompt": "A high-performance Apple Silicon unified memory neural compute module and edge network relay, revealing internal silicon dies, memory stacks, heat spreader, and bus lines",
+    "enriched_prompt": "Orthographic technical cross-section schematic of A high-performance Apple Silicon unified memory neural compute module and edge network relay, revealing internal silicon dies, memory stacks, heat spreader, and bus lines, exploded view revealing internal components and mechanisms, technical callout lines, blueprint engineering aesthetic, high precision line drawing on drafting paper, Dieter Rams functional manual style.",
+    "negative_prompt": "watercolor, messy sketch, fantasy magic, blur, dramatic lens flare, photorealism, artistic painting.",
+    "palette": [
+      "#0F172A",
+      "#1E293B",
+      "#38BDF8",
+      "#94A3B8",
+      "#F97316"
+    ],
+    "created_at": "2026-11-03T14:56:09.668633Z",
+    "crop_transparent": true,
+    "dual_theme": false
+  },
+  {
+    "id": "asset_1793717787",
+    "file": "src/assets/hero/obscure_3_classical_oil.webp",
+    "style_preset": "classical-oil",
+    "original_prompt": "A solitary stone observatory and beacon tower on a rugged coastal cliff representing a silent digital sentinel, atmospheric mist over the ocean",
+    "enriched_prompt": "19th century American Luminist landscape oil painting in the style of George Inness and Sanford Gifford, A solitary stone observatory and beacon tower on a rugged coastal cliff representing a silent digital sentinel, atmospheric mist over the ocean, atmospheric mist, golden hour diffused horizon glow, visible textured oil on canvas brushwork, museum archival quality, fine art plate.",
+    "negative_prompt": "digital art, CGI, vector, 3D render, modern tech, neon, text, watermark, photo.",
+    "palette": [
+      "#3C2A1E",
+      "#5A4D41",
+      "#8C7A6B",
+      "#C2A649",
+      "#2A3B4C"
+    ],
+    "created_at": "2026-11-03T14:56:27.626449Z",
+    "crop_transparent": false,
+    "dual_theme": false
+  },
+  {
+    "id": "asset_1793717806",
+    "file": "src/assets/hero/obscure_4_editorial_wash.webp",
+    "style_preset": "editorial-wash",
+    "original_prompt": "A Black systems architect in profile observing a floating constellation of interconnected nodes and data streams",
+    "enriched_prompt": "Delicate pen and ink illustration with transparent watercolor wash of A Black systems architect in profile observing a floating constellation of interconnected nodes and data streams, loose expressive line art, cold-pressed paper tooth and watercolor pooling, The New Yorker editorial spot illustration, vintage botanical print elegance, white paper background.",
+    "negative_prompt": "3D CGI, vector graphics, hyperrealism, neon, sharp digital lines, acrylic impasto.",
+    "palette": [
+      "#1A1A1A",
+      "#64748B",
+      "#F8FAFC",
+      "#E0E7FF",
+      "#FCE7F3"
+    ],
+    "created_at": "2026-11-03T14:56:46.351480Z",
+    "crop_transparent": true,
+    "dual_theme": false
+  },
+  {
+    "id": "asset_1793717823",
+    "file": "src/assets/hero/obscure_5_retro_y2k.webp",
+    "style_preset": "retro-y2k-frutiger",
+    "original_prompt": "An optical neural processor floating inside a clear glass biome sphere, surrounded by chrome liquid mercury ribbons and clear water bubbles",
+    "enriched_prompt": "Frutiger Aero aesthetic representation of An optical neural processor floating inside a clear glass biome sphere, surrounded by chrome liquid mercury ribbons and clear water bubbles, glossy transparent water droplets, chrome metallic highlights, clear sky blue and lush green hues, lens flares, optimistic tech aesthetic 2000s, high gloss render.",
+    "negative_prompt": "grunge, dark dystopian, flat design, brutalism, desaturated colors, matte.",
+    "palette": [
+      "#00A8E8",
+      "#007EA7",
+      "#003459",
+      "#70E000",
+      "#FFFFFF"
+    ],
+    "created_at": "2026-11-03T14:57:03.979060Z",
+    "crop_transparent": true,
+    "dual_theme": false
+  }
+]

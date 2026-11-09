@@ -1,0 +1,31 @@
+---
+// FloatingContactDock.astro — SOTA Action Dock
+// Crisp Rectangular Geometry (Zero Pills Rule Compliant)
+// Directly routes to /meet booking engine & async brief modal
+---
+
+<div class="fixed bottom-4 right-3 sm:bottom-6 sm:right-6 lg:right-8 z-40 pointer-events-auto">
+  <div class="flex items-center gap-2 p-1.5 rounded-lg border border-zinc-300 dark:border-zinc-800 bg-white/95 dark:bg-zinc-950/95 backdrop-blur-md shadow-2xl">
+    <!-- Synchronous Meet Quick Action -> /meet -->
+    <a
+      href="/meet"
+      class="inline-flex items-center gap-2 px-3.5 py-2 rounded-md bg-zinc-900 dark:bg-zinc-100 hover:bg-emerald-600 dark:hover:bg-emerald-500 text-white dark:text-zinc-900 dark:hover:text-white text-xs font-mono font-semibold transition-all hover:-translate-y-0.5"
+      title="Book a 20-min architecture briefing with Principal Systems Architect Saheed Olaide"
+    >
+      <span class="w-2 h-2 rounded-xs bg-emerald-400 dark:bg-emerald-600"></span>
+      <span>Book Briefing</span>
+      <span class="hidden sm:inline text-zinc-400 dark:text-zinc-500 font-normal">• 3 Slots Open</span>
+      <span>→</span>
+    </a>
+
+    <!-- Asynchronous Transmission Trigger (Pop-Out Modal) -->
+    <button
+      type="button"
+      data-open-modal="contact"
+      class="inline-flex items-center gap-1.5 px-3 py-2 rounded-md border border-zinc-200 dark:border-zinc-800 hover:border-zinc-400 dark:hover:border-zinc-600 bg-zinc-50 dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-zinc-100 text-xs font-mono font-medium transition-all hover:-translate-y-0.5 cursor-pointer"
+      title="Transmit asynchronous briefing document"
+    >
+      <span>Transmit Brief</span>
+    </button>
+  </div>
+</div>

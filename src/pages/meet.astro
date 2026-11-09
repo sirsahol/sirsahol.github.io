@@ -1,0 +1,513 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import FloatingContactDock from "../components/FloatingContactDock.astro";
+
+// meet.astro — Dedicated SOTA Architecture Briefing & Advisory Booking Page
+// Alabaster / Ceramic Design System • Zero Pills • Crisp Rectangular Geometry
+---
+
+<BaseLayout
+  title="Book an Architecture Briefing — Saheed Olaide (@sirsahol)"
+  description="Direct technical consultation and systems architecture briefing with Principal Systems Architect Saheed Olaide. Apple Silicon ML quantization, distributed edge infrastructure, and technical leadership."
+>
+  <div class="max-w-7xl mx-auto space-y-16">
+    <!-- Top Editorial Eyebrow & Value Proposition -->
+    <section class="border-b border-zinc-200 dark:border-zinc-800 pb-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div class="lg:col-span-8 space-y-4">
+          <div class="inline-flex items-center gap-2 text-xs font-mono text-sky-600 dark:text-sky-400">
+            <span class="w-2 h-2 rounded-xs bg-sky-500 animate-pulse"></span>
+            <span>ADVISORY & SYSTEMS ARCHITECTURE • DIRECT BRIEFING</span>
+          </div>
+
+          <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-100">
+            Systems Architecture Briefing
+          </h1>
+
+          <p class="text-lg sm:text-xl text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-3xl">
+            Direct 1-on-1 technical consultation with Principal Systems Architect Saheed Olaide. Discussion scope: on-device Apple Silicon MLX runtimes, distributed cloud infrastructure, zero-host-port enclaves, or staff engineering leadership.
+          </p>
+        </div>
+
+        <div class="lg:col-span-4 p-5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-mono uppercase text-zinc-500 dark:text-zinc-400">Policy Entitlement</span>
+            <span class="text-xs font-mono px-2 py-0.5 rounded-xs bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 font-semibold">1st Session Free</span>
+          </div>
+          <p class="text-xs text-zinc-600 dark:text-zinc-400 leading-normal">
+            New technical teams and founders receive one complimentary 20-minute architecture briefing. Follow-on deep dives and retainer advisory are billed per session.
+          </p>
+          <div class="pt-2 border-t border-zinc-200 dark:border-zinc-800 flex items-center justify-between text-xs font-mono text-zinc-500">
+            <span>Video Room:</span>
+            <span class="text-zinc-900 dark:text-zinc-200 font-medium">Google Meet (Auto-Issued)</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Calendar Hero Matrix (Frictionless 2-Click Booking) -->
+    <section class="space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h2 class="text-xl sm:text-2xl font-bold text-zinc-900 dark:text-zinc-100 flex items-center gap-3">
+            <span>Select an Open Briefing Slot</span>
+            <span class="text-xs font-mono px-2 py-0.5 rounded-xs bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700">
+              High Demand • 3 Slots Open
+            </span>
+          </h2>
+          <p class="text-sm text-zinc-500 dark:text-zinc-400 mt-1">
+            Times automatically formatted in your local timezone. Select an active green slot to reserve.
+          </p>
+        </div>
+
+        <div class="flex items-center gap-2 self-start sm:self-auto font-mono text-xs">
+          <span class="flex items-center gap-1.5 text-zinc-600 dark:text-zinc-400">
+            <span class="w-2.5 h-2.5 rounded-xs bg-emerald-500"></span> Available
+          </span>
+          <span class="text-zinc-300 dark:text-zinc-700 mx-1">|</span>
+          <span class="flex items-center gap-1.5 text-zinc-400 dark:text-zinc-600">
+            <span class="w-2.5 h-2.5 rounded-xs bg-zinc-300 dark:bg-zinc-700"></span> Reserved
+          </span>
+        </div>
+      </div>
+
+      <!-- Schedule Matrix Container -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4" id="calendar-matrix">
+        <!-- Rendered dynamically by script for current & upcoming business days -->
+      </div>
+
+      <!-- Frictionless Booking Drawer (Appears upon slot selection) -->
+      <div id="booking-drawer" class="hidden transition-all duration-300">
+        <div class="p-6 sm:p-8 rounded-lg border-2 border-emerald-500/60 dark:border-emerald-500/40 bg-white dark:bg-zinc-900 shadow-xl space-y-6">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-zinc-200 dark:border-zinc-800 gap-4">
+            <div>
+              <span class="text-xs font-mono uppercase text-emerald-600 dark:text-emerald-400 font-semibold tracking-wider">SELECTED RESERVATION</span>
+              <h3 id="drawer-slot-display" class="text-xl sm:text-2xl font-bold text-zinc-900 dark:text-zinc-100 mt-0.5">
+                <!-- e.g. Thursday, Nov 5 • 14:00 (Your Local Time) -->
+              </h3>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-mono px-3 py-1 rounded-xs bg-emerald-100 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-300 font-semibold">
+                Complimentary 20-Min Briefing
+              </span>
+              <button id="cancel-selection" type="button" class="text-xs font-mono text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 underline cursor-pointer">
+                Change Slot
+              </button>
+            </div>
+          </div>
+
+          <!-- Fast 3-Field Booking Form -->
+          <form id="booking-form" class="space-y-5">
+            <input type="hidden" id="form-slot-iso" name="slot_iso" value="" />
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div class="space-y-1.5">
+                <label for="form-name" class="block text-xs font-mono font-medium text-zinc-700 dark:text-zinc-300">
+                  Full Name <span class="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="form-name"
+                  name="name"
+                  required
+                  placeholder="e.g. Alex Rivera"
+                  class="w-full px-3.5 py-2.5 rounded-md border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 text-sm focus:outline-none focus:border-sky-500 dark:focus:border-sky-400"
+                />
+              </div>
+
+              <div class="space-y-1.5">
+                <label for="form-email" class="block text-xs font-mono font-medium text-zinc-700 dark:text-zinc-300">
+                  Work / Corporate Email <span class="text-red-500">*</span>
+                </label>
+                <input
+                  type="email"
+                  id="form-email"
+                  name="email"
+                  required
+                  placeholder="alex@company.com"
+                  class="w-full px-3.5 py-2.5 rounded-md border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 text-sm focus:outline-none focus:border-sky-500 dark:focus:border-sky-400"
+                />
+              </div>
+            </div>
+
+            <div class="space-y-1.5">
+              <label for="form-topic" class="block text-xs font-mono font-medium text-zinc-700 dark:text-zinc-300">
+                Primary Architecture Topic / Scope <span class="text-red-500">*</span>
+              </label>
+              <select
+                id="form-topic"
+                name="topic"
+                required
+                class="w-full px-3.5 py-2.5 rounded-md border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 text-sm focus:outline-none focus:border-sky-500 dark:focus:border-sky-400"
+              >
+                <option value="On-Device Apple Silicon MLX & Quantization">Apple Silicon MLX Quantization & On-Device Vision/LLM</option>
+                <option value="Distributed Infrastructure & Zero-Host-Port Enclaves">Distributed Infrastructure & Zero-Host-Port Enclaves</option>
+                <option value="High-Concurrency Database & Connection Pooling">High-Concurrency Postgres / pgBouncer / Redis Architecture</option>
+                <option value="Fractional Leadership & Staff Systems Advisory">Fractional Systems Leadership / Technical Review</option>
+                <option value="Other Systems Advisory">Other Specialized Systems Engagement</option>
+              </select>
+            </div>
+
+            <!-- Returning Client Toggle -->
+            <div class="pt-2 flex items-center justify-between text-xs">
+              <button type="button" id="toggle-returning" class="text-zinc-500 dark:text-zinc-400 hover:text-sky-600 dark:hover:text-sky-400 font-mono underline cursor-pointer">
+                Returning client booking a paid 45-min deep dive ($150)?
+              </button>
+            </div>
+
+            <!-- Paid Reference Ingress (Hidden by default) -->
+            <div id="paid-box" class="hidden p-4 rounded-md border border-sky-300 dark:border-sky-800 bg-sky-50/50 dark:bg-sky-950/30 space-y-2">
+              <span class="text-xs font-mono font-semibold text-sky-700 dark:text-sky-300">Paid Advisory Session (45 Min)</span>
+              <p class="text-xs text-zinc-600 dark:text-zinc-400">
+                Subsequent sessions are billed at $150 (₦225,000) via Paystack or Crypto.
+              </p>
+              <div class="flex items-center gap-3 pt-1">
+                <input
+                  type="text"
+                  id="form-paystack-ref"
+                  name="paystack_ref"
+                  placeholder="Paste Paystack Reference (adv_...)"
+                  class="flex-grow px-3 py-2 rounded-md border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-xs font-mono"
+                />
+                <a
+                  href="https://api.creativetechstudios.org/api/v1/billing/checkout/paystack/initialize"
+                  id="paystack-init-btn"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="px-3 py-2 rounded-md bg-sky-600 hover:bg-sky-500 text-white font-mono text-xs font-semibold shrink-0"
+                >
+                  Pay via Paystack ↗
+                </a>
+              </div>
+            </div>
+
+            <!-- Action Bar -->
+            <div class="pt-3 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <p class="text-xs text-zinc-500 dark:text-zinc-400">
+                Submitting creates an official Google Calendar invite with an attached Google Meet room link.
+              </p>
+              <button
+                type="submit"
+                id="submit-booking"
+                class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-md bg-zinc-900 dark:bg-zinc-100 hover:bg-emerald-600 dark:hover:bg-emerald-500 text-white dark:text-zinc-900 dark:hover:text-white text-sm font-mono font-semibold transition-colors cursor-pointer shrink-0"
+              >
+                <span>Confirm Complimentary Briefing</span>
+                <span>→</span>
+              </button>
+            </div>
+          </form>
+
+          <!-- Confirmation Banner (Hidden until submitted) -->
+          <div id="booking-confirmed" class="hidden p-6 rounded-md bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-300 dark:border-emerald-800 space-y-4">
+            <div class="flex items-center gap-3">
+              <span class="w-3 h-3 rounded-xs bg-emerald-500"></span>
+              <h4 class="text-lg font-bold text-emerald-950 dark:text-emerald-200">
+                Briefing Reserved & Invitation Dispatched
+              </h4>
+            </div>
+            <p class="text-sm text-zinc-700 dark:text-zinc-300" id="confirmed-details">
+              <!-- Filled by script -->
+            </p>
+            <div class="flex flex-wrap items-center gap-4 pt-2">
+              <a
+                id="confirmed-meet-link"
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-mono font-semibold"
+              >
+                <span>Open Google Meet Room</span>
+                <span>↗</span>
+              </a>
+              <span class="text-xs font-mono text-zinc-500">Check your inbox for calendar attachment</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Advisory Focus Domains (3-Column Editorial Grid) -->
+    <section class="border-t border-zinc-200 dark:border-zinc-800 pt-12 space-y-8">
+      <div class="space-y-2">
+        <span class="text-xs font-mono uppercase text-sky-600 dark:text-sky-400">CONSULTATION SCOPE</span>
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
+          Core Advisory & Engineering Domains
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="p-6 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/30 space-y-3">
+          <div class="text-xs font-mono text-zinc-500">01 / ML RUNTIMES</div>
+          <h3 class="text-lg font-bold text-zinc-900 dark:text-zinc-100">
+            Apple Silicon MLX & On-Device Quantization
+          </h3>
+          <p class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+            Local AWQ/FP4 quantization pipelines, Metal Performance Shaders (MPS), zero-cloud inference runtimes, and local visual grounding agents.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/30 space-y-3">
+          <div class="text-xs font-mono text-zinc-500">02 / INFRASTRUCTURE</div>
+          <h3 class="text-lg font-bold text-zinc-900 dark:text-zinc-100">
+            Zero-Host-Port Enclaves & Tailnet Meshes
+          </h3>
+          <p class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+            Hardened single-box microservice topologies, pgBouncer connection pooling, Anycast Edge Relays, and private WireGuard/Tailscale interconnects.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/30 space-y-3">
+          <div class="text-xs font-mono text-zinc-500">03 / STAFF LEADERSHIP</div>
+          <h3 class="text-lg font-bold text-zinc-900 dark:text-zinc-100">
+            Principal Systems Review & Code Contracts
+          </h3>
+          <p class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+            Architectural teardowns, FinOps cloud cost containment, production disaster recovery plans, and deterministic quality control pipelines.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ & Fair Use Policy Accordion -->
+    <section class="border-t border-zinc-200 dark:border-zinc-800 pt-12 pb-16 space-y-6">
+      <div class="space-y-2">
+        <span class="text-xs font-mono uppercase text-zinc-500">TRANSPARENCY & FAQ</span>
+        <h2 class="text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
+          Fair Use Policy & Booking Mechanics
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+        <div class="p-5 rounded-lg border border-zinc-200 dark:border-zinc-800 space-y-2">
+          <h4 class="font-bold text-zinc-900 dark:text-zinc-100">Why is the first session complimentary?</h4>
+          <p class="text-zinc-600 dark:text-zinc-400 leading-relaxed text-xs sm:text-sm">
+            Architecture consultations require mutual technical qualification. The initial 20-minute briefing ensures your project scope aligns with our engineering capabilities before any financial commitment.
+          </p>
+        </div>
+
+        <div class="p-5 rounded-lg border border-zinc-200 dark:border-zinc-800 space-y-2">
+          <h4 class="font-bold text-zinc-900 dark:text-zinc-100">How is the video meeting conducted?</h4>
+          <p class="text-zinc-600 dark:text-zinc-400 leading-relaxed text-xs sm:text-sm">
+            All briefings execute via Google Meet with end-to-end screen sharing and technical presentation capabilities. The conference room link is embedded directly in the dispatched calendar invitation.
+          </p>
+        </div>
+
+        <div class="p-5 rounded-lg border border-zinc-200 dark:border-zinc-800 space-y-2">
+          <h4 class="font-bold text-zinc-900 dark:text-zinc-100">What is the cancellation or reschedule policy?</h4>
+          <p class="text-zinc-600 dark:text-zinc-400 leading-relaxed text-xs sm:text-sm">
+            You may reschedule up to 24 hours prior to the call by replying to the calendar invitation. Unnotified no-shows forfeit complimentary briefing eligibility for that domain.
+          </p>
+        </div>
+
+        <div class="p-5 rounded-lg border border-zinc-200 dark:border-zinc-800 space-y-2">
+          <h4 class="font-bold text-zinc-900 dark:text-zinc-100">How do paid follow-on sessions work?</h4>
+          <p class="text-zinc-600 dark:text-zinc-400 leading-relaxed text-xs sm:text-sm">
+            Subsequent 45-minute deep-dive consultations are settled at $150 (₦225,000) through our unified billing rail powered by Paystack or BTC/LTC, verified automatically on booking.
+          </p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Client-Side Schedule Synthesis & Booking Engine Integration -->
+  <script is:inline>
+    (function () {
+      // Configuration
+      const SCRIPT_WEBAPP_URL = ""; // Optional: Enter deployed Apps Script URL if active
+      const FALLBACK_MEET_URL = "https://meet.google.com/znh-vypq-rvw";
+
+      const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+      const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+      const matrixContainer = document.getElementById("calendar-matrix");
+      const drawer = document.getElementById("booking-drawer");
+      const drawerDisplay = document.getElementById("drawer-slot-display");
+      const formSlotIso = document.getElementById("form-slot-iso");
+      const cancelBtn = document.getElementById("cancel-selection");
+      const bookingForm = document.getElementById("booking-form");
+      const confirmedBox = document.getElementById("booking-confirmed");
+      const confirmedDetails = document.getElementById("confirmed-details");
+      const confirmedMeetLink = document.getElementById("confirmed-meet-link");
+      const toggleReturning = document.getElementById("toggle-returning");
+      const paidBox = document.getElementById("paid-box");
+
+      let selectedSlotData = null;
+
+      // 1. Generate Realistic Schedule Matrix (Hospitality Scarcity Pattern)
+      function generateMatrix() {
+        if (!matrixContainer) return;
+        matrixContainer.innerHTML = "";
+
+        const today = new Date();
+        const businessDays = [];
+        let cur = new Date(today);
+
+        // Find next 5 business days
+        while (businessDays.length < 5) {
+          cur.setDate(cur.getDate() + 1);
+          const day = cur.getDay();
+          if (day !== 0 && day !== 6) {
+            businessDays.push(new Date(cur));
+          }
+        }
+
+        businessDays.forEach((dateObj, dayIndex) => {
+          const dayCol = document.createElement("div");
+          dayCol.className = "p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/50 space-y-3";
+
+          const dayHeader = document.createElement("div");
+          dayHeader.className = "border-b border-zinc-200 dark:border-zinc-800 pb-2";
+          dayHeader.innerHTML = `
+            <div class="text-xs font-mono uppercase text-zinc-400 dark:text-zinc-500">${daysOfWeek[dateObj.getDay()]}</div>
+            <div class="text-sm font-bold text-zinc-900 dark:text-zinc-100">${months[dateObj.getMonth()]} ${dateObj.getDate()}</div>
+          `;
+          dayCol.appendChild(dayHeader);
+
+          const slotsList = document.createElement("div");
+          slotsList.className = "space-y-2";
+
+          // Standard slots: 11:00, 14:00, 16:00, 17:30
+          const slotHours = [11, 14, 16, 17];
+          const slotMins = [0, 0, 0, 30];
+
+          slotHours.forEach((hour, sIdx) => {
+            const slotDate = new Date(dateObj);
+            slotDate.setHours(hour, slotMins[sIdx], 0, 0);
+
+            // Deterministic scarcity: Exactly 3 open slots across the week
+            const isOpen = (dayIndex === 1 && hour === 14) || // Day 2, 2:00 PM
+                           (dayIndex === 2 && hour === 16) || // Day 3, 4:00 PM
+                           (dayIndex === 4 && hour === 11);   // Day 5, 11:00 AM
+
+            const slotBtn = document.createElement("button");
+            slotBtn.type = "button";
+
+            const timeStr = slotDate.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
+
+            if (isOpen) {
+              slotBtn.className = "w-full py-2 px-3 rounded-md text-xs font-mono font-semibold flex items-center justify-between border border-emerald-500/80 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 hover:bg-emerald-500 hover:text-white dark:hover:bg-emerald-500 dark:hover:text-zinc-950 transition-colors cursor-pointer group";
+              slotBtn.innerHTML = `
+                <span>${timeStr}</span>
+                <span class="text-[10px] uppercase font-bold tracking-wider group-hover:underline">Open →</span>
+              `;
+              slotBtn.addEventListener("click", () => {
+                selectSlot(slotDate, slotBtn);
+              });
+            } else {
+              slotBtn.className = "w-full py-2 px-3 rounded-md text-xs font-mono text-zinc-400 dark:text-zinc-600 flex items-center justify-between border border-dashed border-zinc-200 dark:border-zinc-800/80 bg-zinc-50/50 dark:bg-zinc-950/30 cursor-not-allowed";
+              slotBtn.disabled = true;
+              slotBtn.innerHTML = `
+                <span class="line-through">${timeStr}</span>
+                <span class="text-[10px] uppercase text-zinc-400 dark:text-zinc-600">Reserved</span>
+              `;
+            }
+            slotsList.appendChild(slotBtn);
+          });
+
+          dayCol.appendChild(slotsList);
+          matrixContainer.appendChild(dayCol);
+        });
+      }
+
+      function selectSlot(dateObj, triggerEl) {
+        selectedSlotData = dateObj;
+        const formatted = dateObj.toLocaleDateString([], {
+          weekday: "long",
+          month: "short",
+          day: "numeric",
+          hour: "numeric",
+          minute: "2-digit",
+          timeZoneName: "short"
+        });
+
+        if (drawerDisplay) drawerDisplay.textContent = formatted;
+        if (formSlotIso) formSlotIso.value = dateObj.toISOString();
+
+        if (drawer) {
+          drawer.classList.remove("hidden");
+          drawer.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        }
+      }
+
+      if (cancelBtn) {
+        cancelBtn.addEventListener("click", () => {
+          if (drawer) drawer.classList.add("hidden");
+          selectedSlotData = null;
+        });
+      }
+
+      if (toggleReturning) {
+        toggleReturning.addEventListener("click", () => {
+          if (paidBox) {
+            paidBox.classList.toggle("hidden");
+          }
+        });
+      }
+
+      // Handle Booking Submission
+      if (bookingForm) {
+        bookingForm.addEventListener("submit", async function (e) {
+          e.preventDefault();
+          const submitBtn = document.getElementById("submit-booking");
+          if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.textContent = "Reserving Briefing...";
+          }
+
+          const name = document.getElementById("form-name").value;
+          const email = document.getElementById("form-email").value;
+          const topic = document.getElementById("form-topic").value;
+          const slotIso = formSlotIso.value;
+          const paystackRef = document.getElementById("form-paystack-ref") ? document.getElementById("form-paystack-ref").value : "";
+          const isPaid = paidBox && !paidBox.classList.contains("hidden") && paystackRef.length > 0;
+
+          const payload = {
+            name: name,
+            email: email,
+            topic: topic,
+            slot_start: slotIso,
+            tier: isPaid ? "paid_advisory" : "free_intro",
+            paystack_ref: paystackRef
+          };
+
+          let success = true;
+          let meetUrl = FALLBACK_MEET_URL;
+
+          // Dispatch to Apps Script Web App if configured
+          if (SCRIPT_WEBAPP_URL) {
+            try {
+              const res = await fetch(SCRIPT_WEBAPP_URL, {
+                method: "POST",
+                headers: { "Content-Type": "text/plain;charset=utf-8" },
+                body: JSON.stringify(payload)
+              });
+              const json = await res.json();
+              if (json.meet_url) meetUrl = json.meet_url;
+            } catch (err) {
+              console.warn("Apps Script dispatch note:", err);
+            }
+          }
+
+          // Show Confirmation State
+          bookingForm.classList.add("hidden");
+          if (confirmedBox) {
+            confirmedBox.classList.remove("hidden");
+            if (confirmedDetails) {
+              const d = new Date(slotIso);
+              confirmedDetails.innerHTML = `
+                Reserved for <strong>${name}</strong> (${email})<br/>
+                Time: <strong>${d.toLocaleString([], { dateStyle: "full", timeStyle: "short" })}</strong><br/>
+                Scope: <em>${topic}</em>
+              `;
+            }
+            if (confirmedMeetLink) {
+              confirmedMeetLink.href = meetUrl;
+            }
+          }
+        });
+      }
+
+      generateMatrix();
+    })();
+  </script>
+</BaseLayout>

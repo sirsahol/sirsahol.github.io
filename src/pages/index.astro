@@ -1,0 +1,257 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SystemsTopography from "../components/SystemsTopography.astro";
+import ContactInlet from "../components/ContactInlet.astro";
+import FloatingContactDock from "../components/FloatingContactDock.astro";
+import recordsSummary from "../data/records-summary.json";
+
+const totalSystems = (recordsSummary.projects || []).length;
+---
+
+<BaseLayout>
+  <!-- Hero Section: Edge-to-Edge Typography with Single Editorial Hero Art -->
+  <section class="pb-16 mb-20 border-b border-zinc-200 dark:border-zinc-800">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+      <!-- Left Column: Editorial Headline & Credentials -->
+      <div class="lg:col-span-7 xl:col-span-7 space-y-6">
+        <div class="space-y-3">
+          <div class="inline-flex items-center gap-2 text-xs sm:text-sm font-mono text-sky-600 dark:text-sky-400">
+            <span class="w-2 h-2 rounded-full bg-sky-500 animate-pulse"></span>
+            <span>Principal Systems Architect & Technical Operator</span>
+          </div>
+
+          <h1 class="text-4xl sm:text-6xl xl:text-7xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-100">
+            Saheed Olaide
+          </h1>
+
+          <p class="text-xl sm:text-2xl text-zinc-700 dark:text-zinc-300 font-medium leading-snug">
+            On-device Apple Silicon quantization runtimes, distributed tailnet device meshes, and zero-downtime edge cloud systems.
+          </p>
+        </div>
+
+        <p class="text-base sm:text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-2xl">
+          Designing hardened multi-node infrastructure, local MLX inference control planes, and empirical evaluation frameworks across production environments.
+        </p>
+
+        <!-- Verified External Profiles Stack -->
+        <div class="flex flex-wrap items-center gap-6 text-sm sm:text-base font-mono pt-2">
+          <a 
+            href="https://github.com/sirsahol" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="text-zinc-800 dark:text-zinc-200 hover:text-sky-600 dark:hover:text-sky-400 underline underline-offset-4 decoration-zinc-300 dark:decoration-zinc-700 transition-colors"
+          >
+            GitHub ↗
+          </a>
+          <span class="text-zinc-300 dark:text-zinc-700">•</span>
+          <a 
+            href="https://huggingface.co/SirSahOl" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="text-zinc-800 dark:text-zinc-200 hover:text-sky-600 dark:hover:text-sky-400 underline underline-offset-4 decoration-zinc-300 dark:decoration-zinc-700 transition-colors"
+          >
+            Hugging Face (90+ Models in Collection) ↗
+          </a>
+          <span class="text-zinc-300 dark:text-zinc-700">•</span>
+          <a 
+            href="https://www.linkedin.com/in/zahyd/" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="text-zinc-800 dark:text-zinc-200 hover:text-sky-600 dark:hover:text-sky-400 underline underline-offset-4 decoration-zinc-300 dark:decoration-zinc-700 transition-colors"
+          >
+            LinkedIn ↗
+          </a>
+          <span class="text-zinc-300 dark:text-zinc-700">•</span>
+          <a 
+            href="/systems" 
+            class="text-sky-600 dark:text-sky-400 hover:underline inline-flex items-center gap-1 font-semibold"
+          >
+            <span>Systems Directory</span>
+            <span>→</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right Column: Single The Hero Art (Dual-Theme Native — Zero Cards, Direct on Canvas) -->
+      <div class="lg:col-span-5 xl:col-span-5 flex justify-center lg:justify-end">
+        <div class="w-full max-w-lg lg:max-w-none space-y-3">
+          <!-- Light Mode Variant: White cold-pressed paper ink & wash dissolving into canvas -->
+          <img 
+            src="/images/hero-editorial-wash.webp" 
+            alt="Saheed Olaide — Principal Systems Architect, literary ink and watercolor portrait (light theme)"
+            class="w-full h-auto object-cover block dark:hidden [mask-image:radial-gradient(ellipse_at_center,black_60%,transparent_98%)] [-webkit-mask-image:radial-gradient(ellipse_at_center,black_60%,transparent_98%)]"
+            loading="eager"
+            decoding="async"
+          />
+          <!-- Dark Mode Variant: Obsidian charcoal paper with luminous chalk & nebula wash dissolving into canvas -->
+          <img 
+            src="/images/hero-editorial-wash-dark.webp" 
+            alt="Saheed Olaide — Principal Systems Architect, luminous chalk and watercolor constellation portrait (dark theme)"
+            class="w-full h-auto object-cover hidden dark:block [mask-image:radial-gradient(ellipse_at_center,black_60%,transparent_98%)] [-webkit-mask-image:radial-gradient(ellipse_at_center,black_60%,transparent_98%)]"
+            loading="eager"
+            decoding="async"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Systems Classifications: Edge-to-Edge Gateway (Zero Cards, Clean Editorial Dividers) -->
+  <section id="systems" class="pb-16 mb-16 border-b border-zinc-200 dark:border-zinc-800 scroll-mt-24">
+    <div class="flex flex-col sm:flex-row sm:items-baseline justify-between pb-4 mb-10 border-b border-zinc-200 dark:border-zinc-800 gap-3">
+      <div>
+        <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-100">
+          Architecture & Systems Classifications
+        </h2>
+        <p class="text-sm sm:text-base text-zinc-500 mt-1">
+          Peer-reviewed engineering invariants and production delivery across 3 technical pillars.
+        </p>
+      </div>
+      <a 
+        href="/systems" 
+        class="text-sm sm:text-base font-mono font-semibold text-sky-600 dark:text-sky-400 hover:underline inline-flex items-center gap-1 shrink-0"
+      >
+        <span>View all {totalSystems} specs</span>
+        <span>→</span>
+      </a>
+    </div>
+
+    <div class="space-y-14">
+      <!-- Domain 1: Edge ML & On-Device Intelligence -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div class="lg:col-span-4 space-y-2">
+          <span class="text-xs sm:text-sm font-mono text-zinc-500 uppercase tracking-wider">Domain 01</span>
+          <h3 class="text-xl sm:text-2xl font-bold text-zinc-900 dark:text-zinc-100">
+            <a href="/systems#edge-ml" class="hover:text-sky-600 dark:hover:text-sky-400 transition-colors">
+              Edge ML & On-Device Intelligence
+            </a>
+          </h3>
+          <span class="inline-block text-xs sm:text-sm font-mono px-2.5 py-1 rounded bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400">
+            4 Verified Systems
+          </span>
+        </div>
+
+        <div class="lg:col-span-8 space-y-4">
+          <p class="text-base sm:text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed">
+            Apple Silicon unified memory quantization (4/8/16-bit) via <strong class="text-zinc-800 dark:text-zinc-200 font-mono">mlx-foundry</strong>, maintaining a public Hugging Face library of <a href="https://hf.co/collections/SirSahOl/mlx-models-by-sirsahol-optimized-for-apple-silicon" target="_blank" rel="noopener noreferrer" class="font-mono text-zinc-800 dark:text-zinc-200 hover:text-sky-600 dark:hover:text-sky-400 underline underline-offset-2 font-semibold">nearly 100 quantized MLX models (~480+ GB corpus)</a>, Google AI Edge LiteRT flatbuffer export, isolated macOS virtual display automation with <strong class="text-zinc-800 dark:text-zinc-200 font-mono">silicon-grounder</strong>, and longitudinal frontier model evaluation.
+          </p>
+          <div class="flex flex-wrap items-center gap-4">
+            <a href="/systems#edge-ml" class="text-sm sm:text-base font-mono text-sky-600 dark:text-sky-400 hover:underline inline-flex items-center gap-1 font-semibold">
+              <span>Explore Edge ML specs</span>
+              <span>→</span>
+            </a>
+            <span class="text-zinc-300 dark:text-zinc-700">•</span>
+            <a href="https://hf.co/collections/SirSahOl/mlx-models-by-sirsahol-optimized-for-apple-silicon" target="_blank" rel="noopener noreferrer" class="text-sm sm:text-base font-mono text-emerald-600 dark:text-emerald-400 hover:underline inline-flex items-center gap-1 font-semibold">
+              <span>HF Collection: 90+ MLX Models ↗</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Domain 2: Distributed Infrastructure & Control Planes -->
+      <div class="border-t border-zinc-200 dark:border-zinc-800/80 pt-12">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          <div class="lg:col-span-4 space-y-2">
+            <span class="text-xs sm:text-sm font-mono text-zinc-500 uppercase tracking-wider">Domain 02</span>
+            <h3 class="text-xl sm:text-2xl font-bold text-zinc-900 dark:text-zinc-100">
+              <a href="/systems#infrastructure" class="hover:text-sky-600 dark:hover:text-sky-400 transition-colors">
+                Distributed Infrastructure & Control Planes
+              </a>
+            </h3>
+            <span class="inline-block text-xs sm:text-sm font-mono px-2.5 py-1 rounded bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400">
+              5 Verified Systems
+            </span>
+          </div>
+
+          <div class="lg:col-span-8 space-y-4">
+            <p class="text-base sm:text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed">
+              Point-to-point WireGuard mesh routing (<strong class="text-zinc-800 dark:text-zinc-200 font-mono">device-mesh</strong>), zero-host-port container bridge enclaves (<strong class="text-zinc-800 dark:text-zinc-200 font-mono">platform-core</strong>) behind Cloudflare Anycast origin shields, Go inference gateways, and serverless SQLite continuous WAL sync with out-of-band spend watchdogs.
+            </p>
+            <div>
+              <a href="/systems#infrastructure" class="text-sm sm:text-base font-mono text-sky-600 dark:text-sky-400 hover:underline inline-flex items-center gap-1 font-semibold">
+                <span>Explore Infrastructure specs</span>
+                <span>→</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Domain 3: Web Applications & Commercial Platforms -->
+      <div class="border-t border-zinc-200 dark:border-zinc-800/80 pt-12">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          <div class="lg:col-span-4 space-y-2">
+            <span class="text-xs sm:text-sm font-mono text-zinc-500 uppercase tracking-wider">Domain 03</span>
+            <h3 class="text-xl sm:text-2xl font-bold text-zinc-900 dark:text-zinc-100">
+              <a href="/systems#web-apps" class="hover:text-sky-600 dark:hover:text-sky-400 transition-colors">
+                Web Applications & Commercial Platforms
+              </a>
+            </h3>
+            <span class="inline-block text-xs sm:text-sm font-mono px-2.5 py-1 rounded bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400">
+              7 Verified Platforms
+            </span>
+          </div>
+
+          <div class="lg:col-span-8 space-y-4">
+            <p class="text-base sm:text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed">
+              Production web applications across real-time video avatars (<a href="https://streampersona.app" target="_blank" rel="noopener noreferrer" class="font-mono text-zinc-800 dark:text-zinc-200 hover:text-sky-600 dark:hover:text-sky-400 underline underline-offset-2">streampersona.app</a>), sovereign AI studio platforms (<a href="https://creativetechstudios.org" target="_blank" rel="noopener noreferrer" class="font-mono text-zinc-800 dark:text-zinc-200 hover:text-sky-600 dark:hover:text-sky-400 underline underline-offset-2">creativetechstudios.org</a>), luxury couture (<a href="https://athmotes.com" target="_blank" rel="noopener noreferrer" class="font-mono text-zinc-800 dark:text-zinc-200 hover:text-sky-600 dark:hover:text-sky-400 underline underline-offset-2">athmotes.com</a>), event ticketing (<a href="https://podium-empire.vercel.app" target="_blank" rel="noopener noreferrer" class="font-mono text-zinc-800 dark:text-zinc-200 hover:text-sky-600 dark:hover:text-sky-400 underline underline-offset-2">podium-empire</a>), healthcare operations (<a href="https://accessphs-prod.web.app" target="_blank" rel="noopener noreferrer" class="font-mono text-zinc-800 dark:text-zinc-200 hover:text-sky-600 dark:hover:text-sky-400 underline underline-offset-2">accessphs</a>), edge streaming (<a href="https://zynox.sirsahol.workers.dev" target="_blank" rel="noopener noreferrer" class="font-mono text-zinc-800 dark:text-zinc-200 hover:text-sky-600 dark:hover:text-sky-400 underline underline-offset-2">zynox</a>), and civic advocacy (<a href="https://tyfpac.org" target="_blank" rel="noopener noreferrer" class="font-mono text-zinc-800 dark:text-zinc-200 hover:text-sky-600 dark:hover:text-sky-400 underline underline-offset-2">tyfpac.org</a>).
+            </p>
+            <div>
+              <a href="/systems#web-apps" class="text-sm sm:text-base font-mono text-sky-600 dark:text-sky-400 hover:underline inline-flex items-center gap-1 font-semibold">
+                <span>Explore Web Platform specs</span>
+                <span>→</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Topography: Edge-to-Edge -->
+  <section id="topology" class="pb-16 mb-16 border-b border-zinc-200 dark:border-zinc-800 scroll-mt-24">
+    <SystemsTopography />
+  </section>
+
+  <!-- Production Reality & Operations (Bottom of Page, Near Footer — Direct on Canvas) -->
+  <section class="pb-8">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
+      <div class="lg:col-span-7 space-y-4">
+        <div class="inline-flex items-center gap-2 text-xs sm:text-sm font-mono text-sky-600 dark:text-sky-400">
+          <span>02 • Production Reality</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
+          Production Infrastructure & Operations
+        </h2>
+        <p class="text-base sm:text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-2xl">
+          Beyond abstract architecture diagrams: hands-on infrastructure assembly, hardware quantization benchmarks on Apple Silicon unified memory, point-to-point WireGuard mesh routing, and production runtime operations.
+        </p>
+      </div>
+
+      <div class="lg:col-span-5 flex flex-col items-center justify-center space-y-2.5">
+        <!-- Light Theme: Studio lighting clay diorama dissolving into canvas -->
+        <img 
+          src="/images/operator-clay-3d.webp" 
+          alt="Hands-on systems architect assembling miniature server infrastructure (light theme)"
+          class="w-full max-w-md h-auto object-cover block dark:hidden [mask-image:radial-gradient(ellipse_at_center,black_60%,transparent_98%)] [-webkit-mask-image:radial-gradient(ellipse_at_center,black_60%,transparent_98%)]"
+          loading="lazy"
+          decoding="async"
+        />
+        <!-- Dark Theme: Datacenter ambient studio lighting clay diorama dissolving into canvas -->
+        <img 
+          src="/images/operator-clay-3d-dark.webp" 
+          alt="Hands-on systems architect assembling miniature server infrastructure in dark datacenter lighting (dark theme)"
+          class="w-full max-w-md h-auto object-cover hidden dark:block [mask-image:radial-gradient(ellipse_at_center,black_60%,transparent_98%)] [-webkit-mask-image:radial-gradient(ellipse_at_center,black_60%,transparent_98%)]"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Communications & Hiring Inlet -->
+  <ContactInlet />
+
+  <!-- Viewport-Streaming Floating Contact Dock (Triggers pop-out modal) -->
+  <FloatingContactDock />
+</BaseLayout>

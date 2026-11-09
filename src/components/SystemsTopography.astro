@@ -1,0 +1,43 @@
+---
+// Systems Topography Component — Edge-to-edge, scaled typography
+---
+
+<div>
+  <div class="flex items-baseline justify-between pb-3 mb-6 border-b border-zinc-200 dark:border-zinc-800">
+    <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
+      Distributed Architecture Topography
+    </h2>
+    <span class="text-xs sm:text-sm font-mono text-zinc-500">
+      Production Enclave
+    </span>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8 pt-2">
+    <!-- Node 1: Workstation -->
+    <div class="border-t border-zinc-200 dark:border-zinc-800 pt-4 space-y-2">
+      <div class="text-xs sm:text-sm font-mono text-zinc-500 uppercase tracking-wider">01 • Edge Workstation</div>
+      <div class="text-base sm:text-lg font-bold text-zinc-900 dark:text-zinc-100">Apple Silicon Node</div>
+      <p class="text-zinc-600 dark:text-zinc-400 leading-relaxed text-sm sm:text-base">
+        Local quantization via <strong class="text-zinc-800 dark:text-zinc-200 font-mono">mlx-foundry</strong> (4/8/16-bit + LiteRT) and background GUI agent automation with <strong class="text-zinc-800 dark:text-zinc-200 font-mono">silicon-grounder</strong> on isolated virtual displays.
+      </p>
+    </div>
+
+    <!-- Node 2: Tailnet Mesh -->
+    <div class="border-t border-zinc-200 dark:border-zinc-800 pt-4 space-y-2">
+      <div class="text-xs sm:text-sm font-mono text-zinc-500 uppercase tracking-wider">02 • Overlay Mesh</div>
+      <div class="text-base sm:text-lg font-bold text-zinc-900 dark:text-zinc-100">Tailscale Device Mesh</div>
+      <p class="text-zinc-600 dark:text-zinc-400 leading-relaxed text-sm sm:text-base">
+        Point-to-point WireGuard mesh routing cross-node execution slots, HMAC approval gates, and zero public inbound ports on lighthouse relays.
+      </p>
+    </div>
+
+    <!-- Node 3: Cloud Control Plane -->
+    <div class="border-t border-zinc-200 dark:border-zinc-800 pt-4 space-y-2">
+      <div class="text-xs sm:text-sm font-mono text-zinc-500 uppercase tracking-wider">03 • Edge Enclave</div>
+      <div class="text-base sm:text-lg font-bold text-zinc-900 dark:text-zinc-100">Platform-Core Control Plane</div>
+      <p class="text-zinc-600 dark:text-zinc-400 leading-relaxed text-sm sm:text-base">
+        Cloudflare Anycast origin shield dropping unauthenticated probes, Go API gateways, and PostgreSQL 16 with continuous Litestream WAL replication.
+      </p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,217 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Self-Hosted Fonts (Zero external network dependencies / zero CDN references) */
+@font-face {
+  font-family: 'Inter Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('/fonts/inter-latin-wght-normal.woff2') format('woff2-variations');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Inter Variable';
+  font-style: italic;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('/fonts/inter-latin-wght-italic.woff2') format('woff2-variations');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 800;
+  src: url('/fonts/jetbrains-mono-latin-wght-normal.woff2') format('woff2-variations');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono Variable';
+  font-style: italic;
+  font-display: swap;
+  font-weight: 100 800;
+  src: url('/fonts/jetbrains-mono-latin-wght-italic.woff2') format('woff2-variations');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@layer base {
+  body {
+    background-color: #ffffff;
+    color: #18181b;
+    font-family: 'Inter Variable', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 1.125rem; /* Scaled up 2 levels */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+    margin: 0;
+    line-height: 1.65;
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+
+  html.dark body {
+    background-color: #09090b;
+    color: #f4f4f5;
+  }
+
+  code, pre, .font-mono {
+    font-family: 'JetBrains Mono Variable', ui-monospace, "SF Mono", "Cascadia Code", monospace;
+  }
+}
+
+/* Documentation Long-Form Prose Styling (Scaled Up 2 Levels) */
+.prose-doc {
+  color: #3f3f46;
+  font-size: 1.125rem;
+  line-height: 1.75;
+}
+
+html.dark .prose-doc {
+  color: #d4d4d8;
+}
+
+.prose-doc h2 {
+  color: #09090b;
+  font-size: 1.75rem; /* Scaled up from 1.25rem */
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #e4e4e7;
+}
+
+html.dark .prose-doc h2 {
+  color: #f4f4f5;
+  border-bottom-color: #27272a;
+}
+
+.prose-doc h3 {
+  color: #09090b;
+  font-size: 1.4rem; /* Scaled up from 1.05rem */
+  font-weight: 600;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+html.dark .prose-doc h3 {
+  color: #f4f4f5;
+}
+
+.prose-doc p {
+  margin-bottom: 1.5rem;
+}
+
+.prose-doc ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.prose-doc li {
+  margin-bottom: 0.65rem;
+}
+
+.prose-doc strong {
+  color: #09090b;
+  font-weight: 600;
+}
+
+html.dark .prose-doc strong {
+  color: #f4f4f5;
+}
+
+.prose-doc a {
+  color: #0284c7;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-color: rgba(2, 132, 199, 0.4);
+  transition: color 0.15s ease;
+}
+
+html.dark .prose-doc a {
+  color: #38bdf8;
+  text-decoration-color: rgba(56, 189, 248, 0.4);
+}
+
+.prose-doc code {
+  font-size: 0.95em;
+  padding: 0.2em 0.45em;
+  background-color: #f4f4f5;
+  color: #09090b;
+  border-radius: 4px;
+  border: 1px solid #e4e4e7;
+}
+
+html.dark .prose-doc code {
+  background-color: #18181b;
+  color: #f4f4f5;
+  border-color: #27272a;
+}
+
+.prose-doc pre {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  padding: 1.25rem 1.5rem;
+  background-color: #18181b;
+  color: #f4f4f5;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+html.dark .prose-doc pre {
+  background-color: #121214;
+  border: 1px solid #27272a;
+}
+
+.prose-doc blockquote {
+  border-left: 4px solid #0284c7;
+  padding-left: 1.25rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: #52525b;
+  font-style: italic;
+}
+
+html.dark .prose-doc blockquote {
+  border-left-color: #38bdf8;
+  color: #a1a1aa;
+}
+
+.prose-doc table {
+  width: 100%;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-collapse: collapse;
+  font-size: 1rem;
+}
+
+.prose-doc th {
+  text-align: left;
+  padding: 0.75rem 1rem;
+  background-color: #f4f4f5;
+  color: #09090b;
+  font-weight: 600;
+  border-bottom: 2px solid #e4e4e7;
+}
+
+html.dark .prose-doc th {
+  background-color: #18181b;
+  color: #f4f4f5;
+  border-bottom-color: #27272a;
+}
+
+.prose-doc td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #e4e4e7;
+}
+
+html.dark .prose-doc td {
+  border-bottom-color: #27272a;
+}

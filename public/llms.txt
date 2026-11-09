@@ -1,0 +1,27 @@
+# Saheed Olaide (@sirsahol) — Technical Architecture Portfolio
+
+> Principal Systems Architect & Technical Operator
+> Specializing in Apple Silicon MLX model quantization, distributed tailnet device meshes, and high-trust edge cloud infrastructure.
+
+## Core Specializations
+- Apple Silicon & Edge ML: Author of mlx-foundry (CLI quantization 4-bit/8-bit/16-bit and LiteRT-LM flatbuffer export) and published open-weight models on Hugging Face Hub (SirSahOl).
+- Agent Control Planes & Device Mesh: Multi-node agent orchestration meshes over Tailscale, synchronizing an 18-server MCP SSOT across 4 coding harnesses (OpenCode, Claude Code, Antigravity, JeikCode) with HMAC approval gates.
+- Background OS Automation: Architect of silicon-grounder, a FastMCP server introducing virtual display coexistence for macOS agents without cursor hijacking.
+- FinOps & Autonomous Data Pipelines: Designer of cloud-image-pipeline with $0.50 job spend circuit breakers and serverless SQLite engines with continuous Litestream WAL sync to GCS.
+- Frontier Model Evaluation: Maintainer of ai-benchmark-tracker, evaluating 32 frontier models across 16 canonical benchmarks.
+
+## Verified Systems
+- MLX Foundry: https://sirsahol.github.io/projects/mlx-foundry
+- Silicon-Grounder: https://sirsahol.github.io/projects/silicon-grounder
+- Cloud Image Pipeline: https://sirsahol.github.io/projects/cloud-image-pipeline
+- AI Benchmark Tracker: https://sirsahol.github.io/projects/ai-benchmark-tracker
+- Platform Core: https://sirsahol.github.io/projects/platform-core
+- CTS Router: https://sirsahol.github.io/projects/cts-router
+- Skills Mesh: https://sirsahol.github.io/projects/skills-mesh
+- Device Mesh: https://sirsahol.github.io/projects/device-mesh
+- Social Feedback Engine: https://sirsahol.github.io/projects/social-feedback-engine
+
+## External Profiles
+- GitHub: https://github.com/sirsahol
+- Hugging Face: https://huggingface.co/SirSahOl
+- LinkedIn: https://www.linkedin.com/in/zahyd/

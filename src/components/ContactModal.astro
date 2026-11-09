@@ -1,0 +1,378 @@
+---
+// ContactModal.astro — Accessible Pop-Out Communications Dialog
+// Enforces admin-scaffold-protocol 3-phase form integrity (Normalize -> Sanitize -> Validate)
+// Native <dialog> with backdrop blur, zero email exposure, zero '//' text, and obfuscated client dispatch
+---
+
+<dialog
+  id="brief-modal"
+  class="fixed inset-0 m-auto z-50 w-[94vw] max-w-2xl max-h-[92vh] overflow-y-auto rounded-2xl bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 shadow-2xl p-6 sm:p-8 backdrop:bg-zinc-950/75 backdrop:backdrop-blur-md text-zinc-900 dark:text-zinc-100"
+>
+  <!-- Modal Top Bar -->
+  <div class="flex items-start justify-between gap-4 pb-4 border-b border-zinc-200 dark:border-zinc-800">
+    <div class="space-y-1">
+      <div class="inline-flex items-center gap-2 text-xs font-mono text-emerald-600 dark:text-emerald-400">
+        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span>Availability: Active</span>
+      </div>
+      <h3 class="text-xl sm:text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
+        Initiate Technical Briefing
+      </h3>
+      <p class="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400">
+        Direct inlet for fractional systems architecture, Apple Silicon ML quantization, and technical advisory.
+      </p>
+    </div>
+
+    <button
+      type="button"
+      id="close-brief-modal"
+      aria-label="Close dialog"
+      class="p-2 rounded-lg text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors shrink-0"
+    >
+      <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Fast-Path Synchronous Scheduling Option -> /meet -->
+  <div class="my-5 p-3.5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-900/40 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+    <div class="space-y-0.5">
+      <div class="text-xs font-semibold text-zinc-900 dark:text-zinc-100 flex items-center gap-2">
+        <span>Need a synchronous architecture briefing?</span>
+        <span class="text-[10px] px-1.5 py-0.5 rounded-xs bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300 font-mono">1st Free</span>
+      </div>
+      <p class="text-[11px] text-zinc-500 dark:text-zinc-400">
+        Direct calendar reservation with auto-issued Google Meet video room.
+      </p>
+    </div>
+    <a
+      href="/meet"
+      class="inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-md bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 text-xs font-mono font-medium hover:bg-emerald-600 dark:hover:bg-emerald-400 dark:hover:text-zinc-950 transition-colors shrink-0"
+    >
+      <span>Book Briefing</span>
+      <span>→</span>
+    </a>
+  </div>
+
+  <!-- Async 3-Phase Form -->
+  <form id="modal-brief-form" class="space-y-4" novalidate>
+    <!-- Names Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+      <div class="space-y-1">
+        <label for="modal-first-name" class="block text-xs font-mono uppercase tracking-wider text-zinc-600 dark:text-zinc-400 font-medium">
+          First Name <span class="text-sky-500">*</span>
+        </label>
+        <input
+          id="modal-first-name"
+          name="firstName"
+          type="text"
+          required
+          placeholder="e.g. Alex"
+          class="w-full px-3 py-2 rounded-lg border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 text-xs sm:text-sm focus:outline-none focus:border-sky-500 dark:focus:border-sky-400 transition-colors"
+        />
+        <span id="modal-err-firstName" class="hidden text-[11px] text-rose-500 font-mono"></span>
+      </div>
+
+      <div class="space-y-1">
+        <label for="modal-last-name" class="block text-xs font-mono uppercase tracking-wider text-zinc-600 dark:text-zinc-400 font-medium">
+          Last Name <span class="text-sky-500">*</span>
+        </label>
+        <input
+          id="modal-last-name"
+          name="lastName"
+          type="text"
+          required
+          placeholder="e.g. Rivera"
+          class="w-full px-3 py-2 rounded-lg border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 text-xs sm:text-sm focus:outline-none focus:border-sky-500 dark:focus:border-sky-400 transition-colors"
+        />
+        <span id="modal-err-lastName" class="hidden text-[11px] text-rose-500 font-mono"></span>
+      </div>
+    </div>
+
+    <!-- Email & Organization Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+      <div class="space-y-1">
+        <label for="modal-email" class="block text-xs font-mono uppercase tracking-wider text-zinc-600 dark:text-zinc-400 font-medium">
+          Work / Institutional Email <span class="text-sky-500">*</span>
+        </label>
+        <input
+          id="modal-email"
+          name="email"
+          type="email"
+          required
+          placeholder="alex@organization.com"
+          class="w-full px-3 py-2 rounded-lg border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 text-xs sm:text-sm focus:outline-none focus:border-sky-500 dark:focus:border-sky-400 transition-colors"
+        />
+        <span id="modal-err-email" class="hidden text-[11px] text-rose-500 font-mono"></span>
+      </div>
+
+      <div class="space-y-1">
+        <label for="modal-org" class="block text-xs font-mono uppercase tracking-wider text-zinc-600 dark:text-zinc-400 font-medium">
+          Organization / Studio (Optional)
+        </label>
+        <input
+          id="modal-org"
+          name="organization"
+          type="text"
+          placeholder="e.g. Acme Systems / Independent"
+          class="w-full px-3 py-2 rounded-lg border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 text-xs sm:text-sm focus:outline-none focus:border-sky-500 dark:focus:border-sky-400 transition-colors"
+        />
+      </div>
+    </div>
+
+    <!-- Inquiry Track -->
+    <div class="space-y-1">
+      <label for="modal-track" class="block text-xs font-mono uppercase tracking-wider text-zinc-600 dark:text-zinc-400 font-medium">
+        Inquiry Track
+      </label>
+      <select
+        id="modal-track"
+        name="track"
+        class="w-full px-3 py-2 rounded-lg border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 text-xs sm:text-sm focus:outline-none focus:border-sky-500 dark:focus:border-sky-400 transition-colors font-mono"
+      >
+        <option value="Schedule 20-Min Intro / Briefing Call">Schedule 20-Min Intro / Briefing Call</option>
+        <option value="Fractional Systems Architecture" selected>Fractional Systems Architect (Contract / Retainer)</option>
+        <option value="On-Device ML & Apple Silicon Quantization">On-Device ML Quantization & Edge Benchmarking</option>
+        <option value="Principal / Staff Systems Engineer Role">Full-Time Principal / Staff Engineering Role</option>
+        <option value="Cloud Run & Distributed Mesh Review">Distributed Infrastructure & Security Architecture Audit</option>
+        <option value="General Technical Advisory">General Technical Advisory</option>
+      </select>
+    </div>
+
+    <!-- Brief Scope -->
+    <div class="space-y-1">
+      <label for="modal-message" class="block text-xs font-mono uppercase tracking-wider text-zinc-600 dark:text-zinc-400 font-medium">
+        Project Brief, Scope & Timeline <span class="text-sky-500">*</span>
+      </label>
+      <textarea
+        id="modal-message"
+        name="message"
+        required
+        rows="3"
+        placeholder="Outline your systems architecture context, target hardware, scope, or timeline (minimum 20 characters)..."
+        class="w-full px-3 py-2 rounded-lg border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 text-xs sm:text-sm focus:outline-none focus:border-sky-500 dark:focus:border-sky-400 transition-colors"
+      ></textarea>
+      <div class="flex items-center justify-between text-[10px] font-mono text-zinc-400 pt-0.5">
+        <span id="modal-err-message" class="hidden text-rose-500"></span>
+        <span id="modal-char-counter" class="ml-auto">0 / 5,000</span>
+      </div>
+    </div>
+
+    <!-- Form Actions -->
+    <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-2">
+      <button
+        type="submit"
+        id="modal-submit-btn"
+        class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 dark:bg-zinc-100 dark:hover:bg-white text-white dark:text-zinc-900 text-xs sm:text-sm font-mono font-semibold transition-colors cursor-pointer disabled:opacity-50"
+      >
+        <span id="modal-btn-text">Transmit Technical Brief</span>
+        <span id="modal-btn-icon">→</span>
+      </button>
+
+      <button
+        type="button"
+        id="modal-copy-btn"
+        class="text-xs font-mono text-zinc-500 dark:text-zinc-400 hover:text-sky-600 dark:hover:text-sky-400 underline underline-offset-4 text-center sm:text-right"
+      >
+        Copy formatted brief to clipboard
+      </button>
+    </div>
+  </form>
+
+  <!-- Status / Feedback Notice -->
+  <div id="modal-status-box" class="hidden mt-4 p-3.5 rounded-lg text-xs font-mono border transition-all"></div>
+</dialog>
+
+<script is:inline>
+  // Obfuscated dispatch endpoint
+  const _mep = atob("aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3MvMTUyOTU0NjIzNTI0ODM3Nzk5OS9LelV1bXBTSW0yU01vWkJHMTVCRXhzZy1mdFZZTW1DQjM1eU1iMUVYenZXN0JiMXVBVW5WalBXd0VFbktVdFdWRkIyVA==");
+
+  const modal = document.getElementById("brief-modal");
+  const closeBtn = document.getElementById("close-brief-modal");
+  const modalForm = document.getElementById("modal-brief-form");
+  const modalSubmitBtn = document.getElementById("modal-submit-btn");
+  const modalBtnText = document.getElementById("modal-btn-text");
+  const modalBtnIcon = document.getElementById("modal-btn-icon");
+  const modalStatusBox = document.getElementById("modal-status-box");
+  const modalCopyBtn = document.getElementById("modal-copy-btn");
+  const modalMsgInput = document.getElementById("modal-message");
+  const modalCharCounter = document.getElementById("modal-char-counter");
+
+  // Global helper to open modal
+  window.openContactModal = function () {
+    if (modal && typeof modal.showModal === "function") {
+      modal.showModal();
+    }
+  };
+
+  // Close handlers
+  closeBtn?.addEventListener("click", () => modal?.close());
+
+  // Click on backdrop to close
+  modal?.addEventListener("click", (e) => {
+    const rect = modal.getBoundingClientRect();
+    const isInDialog = (
+      rect.top <= e.clientY && e.clientY <= rect.top + rect.height &&
+      rect.left <= e.clientX && e.clientX <= rect.left + rect.width
+    );
+    if (!isInDialog) {
+      modal.close();
+    }
+  });
+
+  // Attach to any element with data-open-modal="contact"
+  document.querySelectorAll('[data-open-modal="contact"]').forEach((el) => {
+    el.addEventListener("click", (e) => {
+      e.preventDefault();
+      window.openContactModal();
+    });
+  });
+
+  // Character counter
+  modalMsgInput?.addEventListener("input", () => {
+    const len = modalMsgInput.value.length;
+    modalCharCounter.textContent = `${len.toLocaleString()} / 5,000`;
+  });
+
+  const MODAL_NAME_RE = /^[\p{L}\p{M}'-]+(?:\.|\s[\p{L}\p{M}'-]+|\.[\p{L}\p{M}'-]+)*$/u;
+  const MODAL_EMAIL_RE = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
+
+  function clearModalErrors() {
+    ["firstName", "lastName", "email", "message"].forEach((f) => {
+      const err = document.getElementById(`modal-err-${f}`);
+      if (err) {
+        err.classList.add("hidden");
+        err.textContent = "";
+      }
+    });
+  }
+
+  function showModalFieldError(field, msg) {
+    const err = document.getElementById(`modal-err-${field}`);
+    if (err) {
+      err.classList.remove("hidden");
+      err.textContent = msg;
+    }
+  }
+
+  function getModalPayload() {
+    const firstName = (document.getElementById("modal-first-name").value || "").trim().replace(/\s+/g, " ");
+    const lastName = (document.getElementById("modal-last-name").value || "").trim().replace(/\s+/g, " ");
+    const email = (document.getElementById("modal-email").value || "").trim().toLowerCase();
+    const organization = (document.getElementById("modal-org").value || "").trim().replace(/\s+/g, " ");
+    const track = document.getElementById("modal-track").value;
+    const message = (document.getElementById("modal-message").value || "").trim();
+
+    return { firstName, lastName, email, organization, track, message };
+  }
+
+  modalCopyBtn?.addEventListener("click", () => {
+    const p = getModalPayload();
+    const text = `Systems Architecture Technical Brief\nName: ${p.firstName} ${p.lastName}\nEmail: ${p.email}\nOrganization: ${p.organization || "Independent"}\nTrack: ${p.track}\n\nScope & Objectives:\n${p.message}`;
+    navigator.clipboard.writeText(text).then(() => {
+      modalCopyBtn.textContent = "✓ Brief copied to clipboard";
+      setTimeout(() => {
+        modalCopyBtn.textContent = "Copy formatted brief to clipboard";
+      }, 2500);
+    });
+  });
+
+  modalForm?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    clearModalErrors();
+
+    const p = getModalPayload();
+    let hasError = false;
+
+    if (!p.firstName || p.firstName.length < 2) {
+      showModalFieldError("firstName", "First name must be at least 2 characters.");
+      hasError = true;
+    } else if (!MODAL_NAME_RE.test(p.firstName)) {
+      showModalFieldError("firstName", "First name contains invalid characters.");
+      hasError = true;
+    }
+
+    if (!p.lastName || p.lastName.length < 2) {
+      showModalFieldError("lastName", "Last name must be at least 2 characters.");
+      hasError = true;
+    } else if (!MODAL_NAME_RE.test(p.lastName)) {
+      showModalFieldError("lastName", "Last name contains invalid characters.");
+      hasError = true;
+    }
+
+    if (!p.email || !MODAL_EMAIL_RE.test(p.email)) {
+      showModalFieldError("email", "Please provide a valid work or professional email address.");
+      hasError = true;
+    }
+
+    if (!p.message || p.message.length < 20) {
+      showModalFieldError("message", "Technical brief must be at least 20 characters to provide context.");
+      hasError = true;
+    }
+
+    if (hasError) return;
+
+    modalSubmitBtn.disabled = true;
+    modalBtnText.textContent = "Transmitting brief...";
+    modalBtnIcon.textContent = "●";
+
+    const fullName = `${p.firstName} ${p.lastName}`;
+    const payload = {
+      username: "Portfolio Communications Inlet",
+      avatar_url: "https://sirsahol.github.io/favicon.svg",
+      embeds: [
+        {
+          title: `⚡ Technical Systems Inquiry: ${p.track}`,
+          color: 0x0284c7,
+          fields: [
+            { name: "Client Name", value: fullName, inline: true },
+            { name: "Work Email", value: p.email, inline: true },
+            { name: "Organization", value: p.organization || "Independent / Individual", inline: true },
+            { name: "Inquiry Track", value: p.track, inline: false },
+            { name: "Technical Scope & Context", value: p.message }
+          ],
+          footer: { text: "Verified delivery via sirsahol.github.io communications inlet" },
+          timestamp: new Date().toISOString()
+        }
+      ]
+    };
+
+    try {
+      const response = await fetch(_mep, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+
+      if (response.ok || response.status === 204) {
+        modalStatusBox.className = "mt-4 p-3.5 rounded-lg text-xs font-mono border bg-emerald-50/60 dark:bg-emerald-950/20 border-emerald-300 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 block";
+        modalStatusBox.innerHTML = `
+          <div class="font-bold mb-1">✓ Transmitted Successfully</div>
+          <p class="leading-relaxed">Your briefing has been delivered directly. I will review your requirements and respond to <strong>${p.email}</strong> within 24–48 business hours.</p>
+        `;
+        modalForm.reset();
+        modalCharCounter.textContent = "0 / 5,000";
+        modalBtnText.textContent = "Brief Delivered";
+        modalBtnIcon.textContent = "✓";
+      } else {
+        throw new Error("Dispatch rejected");
+      }
+    } catch (err) {
+      modalStatusBox.className = "mt-4 p-3.5 rounded-lg text-xs font-mono border bg-amber-50/60 dark:bg-amber-950/20 border-amber-300 dark:border-amber-800 text-amber-800 dark:text-amber-300 block";
+      modalStatusBox.innerHTML = `
+        <div class="font-bold mb-1">Transmission Notice</div>
+        <p class="mb-2">Network or client privacy filter prevented direct delivery. Your brief has been preserved. Click below to copy:</p>
+        <button id="modal-retry-copy-btn" class="px-3 py-1.5 rounded bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 font-semibold text-xs">
+          Copy Brief Payload
+        </button>
+      `;
+      document.getElementById("modal-retry-copy-btn")?.addEventListener("click", () => {
+        modalCopyBtn.click();
+      });
+      modalBtnText.textContent = "Transmit Technical Brief";
+      modalBtnIcon.textContent = "→";
+      modalSubmitBtn.disabled = false;
+    }
+  });
+</script>

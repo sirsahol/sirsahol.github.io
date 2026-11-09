@@ -1,0 +1,156 @@
+---
+import "../styles/global.css";
+import ContactModal from "../components/ContactModal.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Saheed Olaide (@sirsahol) — Principal Systems Architect & Technical Operator",
+  description = "Technical documentation and verified architecture portfolio: on-device Apple Silicon quantization pipelines, distributed tailnet device meshes, and edge cloud systems.",
+} = Astro.props;
+
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site || "https://sirsahol.github.io");
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Anti-FOUC Theme Script -->
+    <script is:inline>
+      const getInitialTheme = () => {
+        if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
+          return localStorage.getItem("theme");
+        }
+        if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+          return "dark";
+        }
+        return "light";
+      };
+      const theme = getInitialTheme();
+      if (theme === "dark") {
+        document.documentElement.classList.add("dark");
+        document.documentElement.setAttribute("data-theme", "dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+        document.documentElement.setAttribute("data-theme", "light");
+      }
+    </script>
+
+    <!-- Open Graph / Social Previews -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <!-- Technical Schema (JSON-LD) -->
+    <script type="application/ld+json" is:inline>
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Saheed Olaide",
+        "alternateName": "sirsahol",
+        "jobTitle": "Principal Systems Architect & Technical Operator",
+        "url": "https://sirsahol.github.io",
+        "sameAs": [
+          "https://github.com/sirsahol",
+          "https://huggingface.co/SirSahOl",
+          "https://www.linkedin.com/in/zahyd/"
+        ]
+      }
+    </script>
+  </head>
+  <body class="flex flex-col min-h-screen selection:bg-sky-500/20 selection:text-sky-600 dark:selection:text-sky-300">
+    <!-- Edge-to-Edge Navigation Header -->
+    <header class="border-b border-zinc-200 dark:border-zinc-800 bg-white/95 dark:bg-zinc-950/95 backdrop-blur-md sticky top-0 z-50 transition-colors">
+      <div class="w-full px-6 sm:px-10 lg:px-16 xl:px-20 h-16 sm:h-20 flex items-center justify-between">
+        <a href="/" class="text-lg sm:text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 hover:text-sky-600 dark:hover:text-sky-400 transition-colors">
+          Saheed Olaide
+        </a>
+
+        <nav class="flex items-center gap-6 sm:gap-8 text-sm sm:text-base font-medium text-zinc-600 dark:text-zinc-400">
+          <a href="/systems" class="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">Systems & Architecture</a>
+          <a href="/#topology" class="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">Topology</a>
+
+          <div class="hidden sm:flex items-center gap-5 pl-5 border-l border-zinc-200 dark:border-zinc-800 text-xs sm:text-sm font-mono">
+            <a href="https://github.com/sirsahol" target="_blank" rel="noopener noreferrer" class="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">GitHub ↗</a>
+            <a href="https://huggingface.co/SirSahOl" target="_blank" rel="noopener noreferrer" class="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">Hugging Face ↗</a>
+            <a href="https://www.linkedin.com/in/zahyd/" target="_blank" rel="noopener noreferrer" class="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">LinkedIn ↗</a>
+          </div>
+
+          <!-- Theme Toggle Button -->
+          <button 
+            id="theme-toggle" 
+            type="button" 
+            aria-label="Toggle theme" 
+            class="p-2 rounded-lg border border-zinc-200 dark:border-zinc-800 text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors"
+          >
+            <!-- Sun icon (shows in dark mode) -->
+            <svg id="sun-icon" class="w-5 h-5 hidden dark:block" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
+            </svg>
+            <!-- Moon icon (shows in light mode) -->
+            <svg id="moon-icon" class="w-5 h-5 block dark:hidden" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" />
+            </svg>
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Edge-to-Edge Main Content Viewport -->
+    <main class="flex-grow w-full px-6 sm:px-10 lg:px-16 xl:px-20 py-10 sm:py-16">
+      <slot />
+    </main>
+
+    <!-- Edge-to-Edge Clean Footer with Safe Area Clearance for Action Dock -->
+    <footer class="border-t border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 pt-10 sm:pt-14 pb-28 sm:pb-32 text-sm text-zinc-500">
+      <div class="w-full px-6 sm:px-10 lg:px-16 xl:px-20 flex flex-col md:flex-row items-center justify-between gap-6 md:pr-80 lg:pr-96">
+        <div class="text-center md:text-left">
+          <span class="font-semibold text-zinc-700 dark:text-zinc-300">Saheed Olaide</span>
+          <span class="mx-2">•</span>
+          <span>Principal Systems Architect & Technical Operator</span>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-center gap-6 font-mono text-xs sm:text-sm">
+          <a href="https://github.com/sirsahol" target="_blank" rel="noopener noreferrer" class="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">GitHub ↗</a>
+          <a href="https://huggingface.co/SirSahOl" target="_blank" rel="noopener noreferrer" class="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">Hugging Face ↗</a>
+          <a href="https://www.linkedin.com/in/zahyd/" target="_blank" rel="noopener noreferrer" class="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">LinkedIn ↗</a>
+          <a href="/llms.txt" class="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">llms.txt</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Theme Toggle Handler -->
+    <script is:inline>
+      const btn = document.getElementById("theme-toggle");
+      if (btn) {
+        btn.addEventListener("click", () => {
+          const isDark = document.documentElement.classList.contains("dark");
+          const next = isDark ? "light" : "dark";
+          if (next === "dark") {
+            document.documentElement.classList.add("dark");
+            document.documentElement.setAttribute("data-theme", "dark");
+          } else {
+            document.documentElement.classList.remove("dark");
+            document.documentElement.setAttribute("data-theme", "light");
+          }
+          localStorage.setItem("theme", next);
+        });
+      }
+    </script>
+    <!-- Universal Pop-Out Briefing Modal -->
+    <ContactModal />
+  </body>
+</html>

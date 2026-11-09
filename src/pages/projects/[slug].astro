@@ -1,0 +1,226 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import FloatingContactDock from "../../components/FloatingContactDock.astro";
+import ContactInlet from "../../components/ContactInlet.astro";
+import recordsSummary from "../../data/records-summary.json";
+import { marked } from "marked";
+import fs from "node:fs";
+import path from "node:path";
+
+export async function getStaticPaths() {
+  const projects = recordsSummary.projects || [];
+  return projects.map((p: any) => {
+    const slug = p.file.replace(".cgd.md", "");
+    return {
+      params: { slug },
+      props: { project: p },
+    };
+  });
+}
+
+const { project } = Astro.props;
+const attr = project.attribution || {};
+
+const slug = project.file.replace(".cgd.md", "");
+const rawTitle = project.title || "";
+const name = rawTitle.includes(":") ? rawTitle.split(":")[0].trim() : rawTitle;
+const summary = rawTitle.includes(":") ? rawTitle.split(":").slice(1).join(":").trim() : "";
+
+const formatTag = (str?: string) => (str ? str.replace(/_/g, " ") : "");
+
+// Known verified live deployments (storefronts / public apps)
+const publicDeployments: Record<string, string> = {
+  "faceshift": "https://streampersona.app",
+  "cts-website": "https://creativetechstudios.org",
+  "queenathmotes-webapp": "https://athmotes.com",
+  "podium-empire": "https://podium-empire.vercel.app",
+  "accessphs-webapp": "https://accessphs-prod.web.app",
+  "zynox": "https://zynox.sirsahol.workers.dev",
+  "tyfpac-website": "https://tyfpac.org",
+  "ai-benchmark-tracker": "https://sirsahol.github.io/ai-benchmark-tracker",
+  "cts-router": "https://router.creativetechstudios.org",
+};
+
+// Known public open-source repositories (all others are strictly private)
+const publicRepositories: Record<string, string> = {
+  "mlx-foundry": "https://github.com/SirSahOl/mlx-foundry",
+  "ai-benchmark-tracker": "https://github.com/sirsahol/ai-benchmark-tracker",
+};
+
+const liveUrl = publicDeployments[slug];
+const publicRepoUrl = publicRepositories[slug];
+
+// Read and sanitize SOT markdown for public presentation
+let htmlContent = "";
+
+try {
+  const localSpecPath = path.resolve(
+    process.cwd(),
+    "src/data/specs",
+    project.file
+  );
+  const sotPath = path.resolve(
+    process.cwd(),
+    "../professional-records/records/projects",
+    project.file
+  );
+
+  let raw = "";
+  if (fs.existsSync(localSpecPath)) {
+    raw = fs.readFileSync(localSpecPath, "utf-8");
+  } else if (fs.existsSync(sotPath)) {
+    raw = fs.readFileSync(sotPath, "utf-8");
+  }
+
+  if (raw) {
+    let clean = raw;
+    if (clean.startsWith("---")) {
+      // 1. Strip YAML frontmatter
+      clean = clean.replace(/^---[\s\S]*?---\n*/, "");
+
+      // 2. Strip internal audit tables, HITL logs, and trailing tables
+      clean = clean.replace(/##\s*Verified Claims[\s\S]*$/, "");
+      clean = clean.replace(/##\s*HITL Verification Record[\s\S]*$/, "");
+      clean = clean.replace(/<!--[\s\S]*?-->/g, "");
+
+      // 3. Strip internal sections with sensitive details or proprietary methods
+      clean = clean.replace(/##\s*(?:\d+\.\s*)?Known Limitations[\s\S]*?(?=##|$)/gi, "");
+      clean = clean.replace(/##\s*(?:\d+\.\s*)?Verified Evidence[\s\S]*$/gi, "");
+
+      // 4. Strip internal audit tags: [SNAPSHOT], [STABLE], [CHECK]
+      clean = clean.replace(/`?\[(SNAPSHOT|STABLE|CHECK)\]`?\s*/g, "");
+
+      // 5. Strip redundant top-level H1 (already rendered in header)
+      clean = clean.replace(/^#\s+[^\n]+\n+/, "");
+
+      // 6. Simplify section titles (remove numbering)
+      clean = clean.replace(/^##\s*\d+\.\s*(.+)$/gm, "## $1");
+
+      // 7. Strip raw ASCII diagrams that expose internal topologies/ports
+      clean = clean.replace(/```text[\s\S]*?```/g, "");
+
+      // 8. SECURITY SCRUBBING: Strip all IP addresses
+      clean = clean.replace(/\b(?:\d{1,3}\.){3}\d{1,3}(?:\/\d{1,2})?\b/g, "[internal-network]");
+
+      // 9. SECURITY SCRUBBING: Strip private GitHub repository URLs and clone links
+      clean = clean.replace(/\(https?:\/\/github\.com\/(?:sirsahol|Creative-Tech-Studios)\/[^\s\)\"]+\)/gi, "");
+      clean = clean.replace(/https?:\/\/github\.com\/(?:sirsahol|Creative-Tech-Studios)\/[^\s\)\"<]+/gi, "");
+      clean = clean.replace(/git@github\.com:[^\s\)\"<]+/gi, "");
+
+      // 10. SECURITY SCRUBBING: Strip internal ports (:8080, :8082, :8085, etc.)
+      clean = clean.replace(/:\d{4,5}\b/g, "");
+
+      // 11. SECURITY SCRUBBING: Strip sensitive header names and token parameters
+      clean = clean.replace(/`?X-Origin-Shield`?/g, "origin authentication token");
+
+      // 12. FINOPS SCRUBBING: Strip dollar signs and cost figures
+      clean = clean.replace(/\$\d+(\.\d+)?/g, "budget limit");
+
+      // 13. Strip internal claim IDs: claim-xxxxxxxx
+      clean = clean.replace(/`?claim-[a-f0-9]{8}`?:?\s*/gi, "");
+
+      // 14. Replace internal .cgd.md links with public route links
+      clean = clean.replace(/\]\(([a-zA-Z0-9_-]+)\.cgd\.md\)/g, "](/projects/$1)");
+    }
+
+    // Parse sanitized markdown to HTML
+    htmlContent = await marked.parse(clean);
+  }
+} catch (e) {
+  // Graceful fallback
+}
+---
+
+<BaseLayout
+  title={`${name} — Systems Architecture Specification`}
+  description={`Architecture specification for ${name}: scope, technical invariants, and verified delivery.`}
+>
+  <article class="w-full">
+    <!-- Breadcrumb Navigation -->
+    <div class="mb-10">
+      <a href="/systems" class="text-sm sm:text-base font-mono text-zinc-500 hover:text-sky-600 dark:hover:text-sky-400 transition-colors inline-flex items-center gap-2">
+        <span>←</span>
+        <span>Return to Systems Directory</span>
+      </a>
+    </div>
+
+    <!-- Article Header: Scaled & Full Edge-to-Edge Utilization -->
+    <header class="border-b border-zinc-200 dark:border-zinc-800 pb-10 mb-10 w-full">
+      <div class="flex flex-wrap items-center gap-3 text-xs sm:text-sm font-mono text-zinc-500 mb-4">
+        {attr.delivery_attribution && (
+          <span class="capitalize px-2.5 py-1 rounded bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300">
+            {formatTag(attr.delivery_attribution)}
+          </span>
+        )}
+        {attr.maturity && (
+          <span class="capitalize px-2.5 py-1 rounded bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300">
+            {formatTag(attr.maturity)}
+          </span>
+        )}
+      </div>
+
+      <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-100 mb-4">
+        {name}
+      </h1>
+
+      {summary && (
+        <p class="text-base sm:text-xl text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-5xl">
+          {summary}
+        </p>
+      )}
+
+      <!-- Action Links: Live Deployment or Public Open Source -->
+      {(liveUrl || publicRepoUrl) && (
+        <div class="flex flex-wrap items-center gap-4 mt-6 pt-2">
+          {liveUrl && (
+            <a
+              href={liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 px-4 py-2 text-sm sm:text-base font-mono font-semibold rounded-lg bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 hover:bg-sky-600 dark:hover:bg-sky-400 transition-colors shadow-sm"
+            >
+              <span>Visit Live Platform</span>
+              <span>↗</span>
+            </a>
+          )}
+          {publicRepoUrl && (
+            <a
+              href={publicRepoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 px-4 py-2 text-sm sm:text-base font-mono font-medium rounded-lg border border-zinc-300 dark:border-zinc-700 text-zinc-800 dark:text-zinc-200 hover:text-sky-600 dark:hover:text-sky-400 hover:border-sky-600 dark:hover:border-sky-400 transition-colors"
+            >
+              <span>Public Repository</span>
+              <span>↗</span>
+            </a>
+          )}
+        </div>
+      )}
+    </header>
+
+    <!-- Clean Full-Width Editorial Content (Zero gutter compression) -->
+    <div class="w-full">
+      {htmlContent ? (
+        <div class="prose-doc w-full text-base sm:text-lg leading-relaxed" set:html={htmlContent} />
+      ) : (
+        <p class="text-sm text-zinc-500">
+          Architecture specification available in canonical source records.
+        </p>
+      )}
+    </div>
+
+    <!-- Article Footer -->
+    <div class="mt-16 pt-8 border-t border-zinc-200 dark:border-zinc-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm font-mono text-zinc-500">
+      <a href="/systems" class="hover:text-sky-600 dark:hover:text-sky-400 transition-colors font-medium">
+        ← Return to Systems Directory
+      </a>
+      <span>Verified Systems Specification • Canonical SOT Grounded</span>
+    </div>
+
+    <!-- In-Page Communications Inlet -->
+    <ContactInlet />
+
+    <!-- Viewport-Streaming Floating Contact Dock (Never squeezes page width) -->
+    <FloatingContactDock />
+  </article>
+</BaseLayout>

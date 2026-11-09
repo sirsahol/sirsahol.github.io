@@ -1,0 +1,724 @@
+{
+  "repository": "sirsahol/professional-records",
+  "generated_at": "2026-11-09T12:10:15.478724+00:00",
+  "target_destination": "personal_site",
+  "projects_count": 16,
+  "projects": [
+    {
+      "file": "accessphs-webapp.cgd.md",
+      "title": "Access PHS: African Healthcare Portal and Operations Administration",
+      "clarity-gate-version": "2.1",
+      "processed-date": "2026-11-03",
+      "clarity-status": "CLEAR",
+      "hitl-status": "REVIEWED",
+      "document-sha256": "5c805bb032917c9d1f2996a4eb3c5ffca5c056dc11d5b0e72ac7563bc06b9079",
+      "attribution": {
+        "relationship": "client_engagement",
+        "ownership": "client_partner",
+        "delivery_attribution": "principal_architect_and_implementer",
+        "maturity": "production_released"
+      },
+      "publication": {
+        "default": "deny",
+        "destinations": {
+          "personal_site": "allow",
+          "github_profile": "allow",
+          "cts_marketing": "deny",
+          "cv_export": "allow"
+        }
+      },
+      "verified_claims": [
+        {
+          "claim": "accessphs-webapp combines corporate marketing website with multi-tenant healthcare administration portal",
+          "value": "Healthcare marketing + clinic admin",
+          "source": "accessphs-webapp README.md",
+          "verified": "2026-11-03"
+        },
+        {
+          "claim": "accessphs-webapp mounts TanStack Table v8 administrative spoke with data safety tripwires",
+          "value": "TanStack Table v8 + safety tripwires",
+          "source": "accessphs-webapp commit b445da5",
+          "verified": "2026-11-03"
+        },
+        {
+          "claim": "accessphs-webapp enforces Playwright testing and commitlint conventions at commit b445da5",
+          "value": "Commit b445da5 Playwright + commitlint",
+          "source": "accessphs-webapp package.json",
+          "verified": "2026-11-03"
+        }
+      ]
+    },
+    {
+      "file": "ai-benchmark-tracker.cgd.md",
+      "title": "AI Benchmark Tracker: Longitudinal Frontier Model Evaluation Engine",
+      "clarity-gate-version": "2.1",
+      "processed-date": "2026-11-03",
+      "clarity-status": "CLEAR",
+      "hitl-status": "REVIEWED",
+      "document-sha256": "0489783f9cb3da1e1f15c32ad3546c8ace27e3aa52c917c890721effd9e65b6e",
+      "attribution": {
+        "relationship": "independent_venture",
+        "ownership": "personal",
+        "delivery_attribution": "personal_sole_author",
+        "maturity": "production_released"
+      },
+      "publication": {
+        "default": "deny",
+        "destinations": {
+          "personal_site": "allow",
+          "github_profile": "allow",
+          "cts_marketing": "deny",
+          "cv_export": "allow"
+        }
+      },
+      "verified_claims": [
+        {
+          "claim": "ai-benchmark-tracker tracks 32 frontier models across 16 benchmarks including SWE-Bench Verified, GPQA Diamond, and FrontierMath",
+          "value": "32 frontier models across 16 benchmarks",
+          "source": "sirsahol/ai-benchmark-tracker README.md and data/models/",
+          "verified": "2026-11-03"
+        },
+        {
+          "claim": "ai-benchmark-tracker deploys an interactive Vite 6 and Svelte 5 static dashboard to GitHub Pages with zero external backend dependencies",
+          "value": "Vite 6 + Svelte 5 static GitHub Pages dashboard",
+          "source": "sirsahol/ai-benchmark-tracker package.json and commit a61aff8",
+          "verified": "2026-11-09"
+        },
+        {
+          "claim": "Data pipeline compiles modular YAML model evaluations into static JSON with automated GitHub Actions CI/CD deployment",
+          "value": "YAML to static JSON compilation via build_json.py",
+          "source": "sirsahol/ai-benchmark-tracker/README.md and .github/workflows/deploy.yml",
+          "verified": "2026-11-03"
+        }
+      ]
+    },
+    {
+      "file": "cloud-image-pipeline.cgd.md",
+      "title": "Cloud Image Pipeline: Dual-Tier Multimodal and GPU Diffusion Engine",
+      "clarity-gate-version": "2.1",
+      "processed-date": "2026-11-03",
+      "clarity-status": "CLEAR",
+      "hitl-status": "REVIEWED",
+      "document-sha256": "057d2b5393d912aa0575b0a64d6508517a67efc02103ba5c56feb405b3eaaa7d",
+      "attribution": {
+        "relationship": "independent_venture",
+        "ownership": "personal",
+        "delivery_attribution": "personal_sole_author",
+        "maturity": "production_released"
+      },
+      "publication": {
+        "default": "deny",
+        "destinations": {
+          "personal_site": "allow",
+          "github_profile": "allow",
+          "cts_marketing": "deny",
+          "cv_export": "allow"
+        }
+      },
+      "verified_claims": [
+        {
+          "claim": "cloud-image-pipeline enforces an out-of-band spend watchdog and a 45-second SSH allocation SLA across Gemini and Vast.ai GPU workers",
+          "value": "Spend watchdog circuit breaker and 45s SSH SLA",
+          "source": "cloud-image-pipeline/README.md and commit 58417bf",
+          "verified": "2026-11-03"
+        },
+        {
+          "claim": "cloud-image-pipeline supports native PyTorch SDPA attention across NVIDIA RTX 3090 Ampere, RTX 4090 Ada, and RTX PRO 4000 Blackwell architectures",
+          "value": "NVIDIA Ampere, Ada, Blackwell support",
+          "source": "cloud-image-pipeline/README.md and Dockerfile",
+          "verified": "2026-11-03"
+        },
+        {
+          "claim": "Dual-engine architecture exposes FastMCP tool catalog including compile_manifest, review_gate, and execute_job",
+          "value": "FastMCP tool catalog with 3-phase HITL gate",
+          "source": "cloud-image-pipeline/docs/canon/server-actions.md",
+          "verified": "2026-11-03"
+        }
+      ]
+    },
+    {
+      "file": "cts-router.cgd.md",
+      "title": "CTS Router: Universal Model Gateway, Gated Catalog, and Dual Settlement Portal",
+      "clarity-gate-version": "2.1",
+      "processed-date": "2026-11-03",
+      "clarity-status": "CLEAR",
+      "hitl-status": "REVIEWED",
+      "document-sha256": "bf5796e27f4bb0ec16cd54a4c73211c8ca1d279588fb3a412b0cd0a7fb61343a",
+      "attribution": {
+        "relationship": "venture_product",
+        "ownership": "creative_tech_studios",
+        "delivery_attribution": "principal_architect_and_implementer",
+        "maturity": "production_released"
+      },
+      "publication": {
+        "default": "deny",
+        "destinations": {
+          "personal_site": "allow",
+          "github_profile": "allow",
+          "cts_marketing": "allow",
+          "cv_export": "allow"
+        }
+      },
+      "verified_claims": [
+        {
+          "claim": "cts-router integrates dual-currency settlement supporting Paystack NGN checkout and native on-chain BIP-84 SegWit BTC/LTC top-up",
+          "value": "Paystack NGN + native BIP-84 BTC/LTC",
+          "source": "Creative-Tech-Studios/cts-router README.md",
+          "verified": "2026-11-03"
+        },
+        {
+          "claim": "cts-router enforces ephemeral-transit Guard security and HMAC SHA-256 API key derivation with multi-tenant rate limits",
+          "value": "Ephemeral Guard + HMAC SHA-256 keys",
+          "source": "Creative-Tech-Studios/cts-router README.md and commit 194ce50",
+          "verified": "2026-11-03"
+        },
+        {
+          "claim": "cts-router gates public model catalog via GET /api/v1/models requiring approved routes positive pricing and radiometry endpoints",
+          "value": "Gated /api/v1/models catalog",
+          "source": "Creative-Tech-Studios/cts-router commit bbba333",
+          "verified": "2026-11-03"
+        }
+      ]
+    },
+    {
+      "file": "cts-website.cgd.md",
+      "title": "Creative Tech Studios: Flagship Corporate Web Platform and Documentation Hub",
+      "clarity-gate-version": "2.1",
+      "processed-date": "2026-11-03",
+      "clarity-status": "CLEAR",
+      "hitl-status": "REVIEWED",
+      "document-sha256": "04cc1faac4bad108a9058f2308b3f16f352c0ef1d7ccf1a8de923dcc62dddddf",
+      "attribution": {
+        "relationship": "venture_product",
+        "ownership": "creative_tech_studios",
+        "delivery_attribution": "principal_architect_and_implementer",
+        "maturity": "production_released"
+      },
+      "publication": {
+        "default": "deny",
+        "destinations": {
+          "personal_site": "allow",
+          "github_profile": "allow",
+          "cts_marketing": "allow",
+          "cv_export": "allow"
+        }
+      },
+      "verified_claims": [
+        {
+          "claim": "cts-website serves as the flagship corporate platform for Creative Tech Studios with unified product showcases",
+          "value": "Flagship corporate platform",
+          "source": "CTS README.md",
+          "verified": "2026-11-03"
+        },
+        {
+          "claim": "cts-website aligns sovereign product suite to StreamPersona CTS Router and FaceGuard Enterprise Proxy",
+          "value": "3 sovereign flagship products",
+          "source": "CTS commit b1cc4aa",
+          "verified": "2026-11-03"
+        },
+        {
+          "claim": "cts-website externalizes quantized models to dedicated releases at commit b1cc4aa",
+          "value": "Commit b1cc4aa model externalization",
+          "source": "CTS git log",
+          "verified": "2026-11-03"
+        }
+      ]
+    },
+    {
+      "file": "device-mesh.cgd.md",
+      "title": "Device Mesh: Provider-Independent Multi-Node Mesh, MCP SSOT, and Agent Operating System",
+      "clarity-gate-version": "2.1",
+      "processed-date": "2026-11-03",
+      "clarity-status": "CLEAR",
+      "hitl-status": "REVIEWED",
+      "document-sha256": "1113d3f5012817fe6435074facc9ea986462953428e58dabde09bfbc4adab95f",
+      "attribution": {
+        "relationship": "internal_tooling",
+        "ownership": "personal",
+        "delivery_attribution": "personal_sole_author",
+        "maturity": "production_released"
+      },
+      "publication": {
+        "default": "deny",
+        "destinations": {
+          "personal_site": "allow",
+          "github_profile": "allow",
+          "cts_marketing": "deny",
+          "cv_export": "allow"
+        }
+      },
+      "verified_claims": [
+        {
+          "claim": "device-mesh coordinates 3-node provider-independent mesh over Tailscale tailnet with loopback routing and GCP IAP SSH",
+          "value": "3-node tailnet mesh + IAP SSH",
+          "source": "device-mesh/README.md and STATE.md",
+          "verified": "2026-11-03"
+        },
+        {
+          "claim": "device-mesh Phase 4 agent 0.3.0 implements HMAC-signed destructive approval gates and lease watchdogs under launchd",
+          "value": "Phase 4 agent 0.3.0 with HMAC gates",
+          "source": "device-mesh/STATE.md and commit 24f15ed",
+          "verified": "2026-11-03"
+        },
+        {
+          "claim": "device-mesh synchronizes multi-harness MCP SSOT matrix across OpenCode Claude Antigravity and JeikCode",
+          "value": "18-server MCP SSOT matrix across 4 harnesses",
+          "source": "device-mesh commit 24f15ed and snapshots/ssot-matrix.json",
+          "verified": "2026-11-03"
+        }
+      ]
+    },
+    {
+      "file": "faceshift.cgd.md",
+      "title": "StreamPersona: High-Precision Real-Time Identity Transformation Suite",
+      "clarity-gate-version": "2.1",
+      "processed-date": "2026-11-03",
+      "clarity-status": "CLEAR",
+      "hitl-status": "REVIEWED",
+      "document-sha256": "0338393b99401db5e6ca88e280c040cb776bdbfba3e166cbe2d9cfa7a5da951e",
+      "attribution": {
+        "relationship": "venture_product",
+        "ownership": "creative_tech_studios",
+        "delivery_attribution": "principal_architect_and_implementer",
+        "maturity": "production_released"
+      },
+      "publication": {
+        "default": "deny",
+        "destinations": {
+          "personal_site": "allow",
+          "github_profile": "allow",
+          "cts_marketing": "allow",
+          "cv_export": "allow"
+        }
+      },
+      "verified_claims": [
+        {
+          "claim": "faceshift StreamPersona delivers real-time face transformation and voice cloning for live video calls",
+          "value": "Real-time face transformation suite",
+          "source": "faceshift README.md",
+          "verified": "2026-11-03"
+        },
+        {
+          "claim": "faceshift operates on zero-inbound LiveKit Cloud architecture eliminating exposed public tunnels",
+          "value": "Zero-inbound LiveKit Cloud transport",
+          "source": "platform-core and faceshift docs",
+          "verified": "2026-11-03"
+        },
+        {
+          "claim": "faceshift automated CI workflow dispatches documentation synchronizations at commit c2d5ad6",
+          "value": "Commit c2d5ad6 CI dispatch workflow",
+          "source": "faceshift git log",
+          "verified": "2026-11-03"
+        }
+      ]
+    },
+    {
+      "file": "mlx-foundry.cgd.md",
+      "title": "MLX Foundry: Local Apple Silicon Quantization and Benchmarking Pipeline",
+      "clarity-gate-version": "2.1",
+      "processed-date": "2026-11-03",
+      "clarity-status": "CLEAR",
+      "hitl-status": "REVIEWED",
+      "document-sha256": "209f429ecebd5727cc7aaafb8570d09572453731254c4d42b2d29d076206251b",
+      "attribution": {
+        "relationship": "independent_venture",
+        "ownership": "personal",
+        "delivery_attribution": "personal_sole_author",
+        "maturity": "production_released"
+      },
+      "publication": {
+        "default": "deny",
+        "destinations": {
+          "personal_site": "allow",
+          "github_profile": "allow",
+          "cts_marketing": "deny",
+          "cv_export": "allow"
+        }
+      },
+      "verified_claims": [
+        {
+          "claim": "mlx-foundry delivers automated 4-bit, 8-bit, and 16-bit MLX model quantization and benchmarking on Apple Silicon unified memory",
+          "value": "4-bit, 8-bit, 16-bit MLX quantization",
+          "source": "SirSahOl/mlx-foundry README.md and pyproject.toml v0.3.0",
+          "verified": "2026-11-03"
+        },
+        {
+          "claim": "mlx-foundry integrates optional Google AI Edge LiteRT-LM flatbuffer compilation with fail-closed backend validation",
+          "value": "LiteRT-LM flatbuffer export",
+          "source": "SirSahOl/mlx-foundry commit 43e5e79",
+          "verified": "2026-11-09"
+        },
+        {
+          "claim": "Published open-weight models include SirSahOl/Jev-Style-0.8B-Decision-v3-mlx-16bit with verified MLX publication tags on Hugging Face Hub",
+          "value": "SirSahOl/Jev-Style-0.8B-Decision-v3-mlx-16bit",
+          "source": "Hugging Face Hub SirSahOl and batch_progress.json",
+          "verified": "2026-11-03"
+        },
+        {
+          "claim": "Published curated collection of 90+ optimized models 'MLX Models by SirSahOl \u2014 Optimized for Apple Silicon' on Hugging Face Hub",
+          "value": "90+ model curated collection",
+          "source": "Hugging Face Hub collection SirSahOl/mlx-models-by-sirsahol-optimized-for-apple-silicon and hf-registry.json",
+          "verified": "2026-11-03"
+        },
+        {
+          "claim": "Published 90+ open-weight models totaling approximately 484 GB corpus on Hugging Face Hub under @SirSahOl",
+          "value": "90+ published models (~484 GB corpus)",
+          "source": "Hugging Face Hub @SirSahOl API and hf-registry.json",
+          "verified": "2026-11-03"
+        }
+      ]
+    },
+    {
+      "file": "platform-core.cgd.md",
+      "title": "Platform Core: Production Multi-Service Infrastructure and Inference Gateway",
+      "clarity-gate-version": "2.1",
+      "processed-date": "2026-11-03",
+      "clarity-status": "CLEAR",
+      "hitl-status": "REVIEWED",
+      "document-sha256": "8812376ecfa77bc0b7869b8857f795494a1d634325f9bc52e7a62cbc6b8c405f",
+      "attribution": {
+        "relationship": "venture_infrastructure",
+        "ownership": "creative_tech_studios",
+        "delivery_attribution": "principal_architect_and_implementer",
+        "maturity": "production_released"
+      },
+      "publication": {
+        "default": "deny",
+        "destinations": {
+          "personal_site": "allow",
+          "github_profile": "allow",
+          "cts_marketing": "allow",
+          "cv_export": "allow"
+        }
+      },
+      "verified_claims": [
+        {
+          "claim": "platform-core consolidates control-plane services onto a single-box VPS with zero host ports published and Docker bridge isolation (172.28.0.0/16)",
+          "value": "Single-box VPS with zero host ports published",
+          "source": "Creative-Tech-Studios/platform-core README.md",
+          "verified": "2026-11-03"
+        },
+        {
+          "claim": "platform-core origin shield routes ingress through Cloudflare Anycast Edge with native origin shield (X-Origin-Shield transform rules) and Cloudflare R2 object storage (dl.streampersona.app) with 403 denial for direct access",
+          "value": "Cloudflare Anycast edge relay and origin shield with R2 storage",
+          "source": "Creative-Tech-Studios/platform-core commit 0877ef8",
+          "verified": "2026-11-09"
+        },
+        {
+          "claim": "platform-core enforces durable inference settlement with PostgreSQL outbox tasks and micro-dollar residue accounting",
+          "value": "PostgreSQL outbox and micro-dollar residue ledger",
+          "source": "Creative-Tech-Studios/platform-core migration 022",
+          "verified": "2026-11-03"
+        }
+      ]
+    },
+    {
+      "file": "podium-empire.cgd.md",
+      "title": "Podium Empire: Event Management and Awards Web Platform",
+      "clarity-gate-version": "2.1",
+      "processed-date": "2026-11-03",
+      "clarity-status": "CLEAR",
+      "hitl-status": "REVIEWED",
+      "document-sha256": "0c9cea3cdb1f919f7cab772f8d0e79bc928fbecf2e6085183cfa71d13c5fdea2",
+      "attribution": {
+        "relationship": "client_engagement",
+        "ownership": "client_partner",
+        "delivery_attribution": "principal_architect_and_implementer",
+        "maturity": "production_released"
+      },
+      "publication": {
+        "default": "deny",
+        "destinations": {
+          "personal_site": "allow",
+          "github_profile": "allow",
+          "cts_marketing": "deny",
+          "cv_export": "allow"
+        }
+      },
+      "verified_claims": [
+        {
+          "claim": "podium-empire provides media event management and awards platform built on Turborepo",
+          "value": "Media event & awards platform",
+          "source": "podium-empire package.json",
+          "verified": "2026-11-03"
+        },
+        {
+          "claim": "podium-empire mounts TanStack Table primitive with TypeScript type safety across apps and packages",
+          "value": "TanStack Table primitive + TypeScript",
+          "source": "podium-empire commit 591a98d",
+          "verified": "2026-11-03"
+        },
+        {
+          "claim": "podium-empire maintains persistent data structure protocol graph at commit 591a98d",
+          "value": "Commit 591a98d DSP sync",
+          "source": "podium-empire git log",
+          "verified": "2026-11-03"
+        }
+      ]
+    },
+    {
+      "file": "queenathmotes-webapp.cgd.md",
+      "title": "Queenathmotes: Athmotes Luxe E-Commerce Platform and Operations Portal",
+      "clarity-gate-version": "2.1",
+      "processed-date": "2026-11-03",
+      "clarity-status": "CLEAR",
+      "hitl-status": "REVIEWED",
+      "document-sha256": "06eb65df4a061b7fd9d70286776378929f3f55c83d30ba8ed4e376fd24675a61",
+      "attribution": {
+        "relationship": "client_engagement",
+        "ownership": "client_partner",
+        "delivery_attribution": "principal_architect_and_implementer",
+        "maturity": "production_released"
+      },
+      "publication": {
+        "default": "deny",
+        "destinations": {
+          "personal_site": "allow",
+          "github_profile": "allow",
+          "cts_marketing": "deny",
+          "cv_export": "allow"
+        }
+      },
+      "verified_claims": [
+        {
+          "claim": "queenathmotes-webapp delivers Athmotes Luxe cultural luxury fashion storefront and administration portal",
+          "value": "Athmotes Luxe luxury fashion platform",
+          "source": "queenathmotes-webapp README.md",
+          "verified": "2026-11-03"
+        },
+        {
+          "claim": "queenathmotes-webapp incorporates Playwright end-to-end verification and Tailwind CSS v4 styling",
+          "value": "Playwright E2E + Tailwind CSS v4",
+          "source": "queenathmotes-webapp package.json",
+          "verified": "2026-11-03"
+        },
+        {
+          "claim": "queenathmotes-webapp documents Gate 5 production ship evidence at commit 55aa824",
+          "value": "Commit 55aa824 Gate 5 ship evidence",
+          "source": "docs/ops/GATE_5_EVIDENCE.md",
+          "verified": "2026-11-03"
+        }
+      ]
+    },
+    {
+      "file": "silicon-grounder.cgd.md",
+      "title": "Silicon-Grounder: Single-Device Coexistence and macOS Visual Grounding",
+      "clarity-gate-version": "2.1",
+      "processed-date": "2026-11-03",
+      "clarity-status": "CLEAR",
+      "hitl-status": "REVIEWED",
+      "document-sha256": "3ea9143d02c38c47c607e16d029331b0641560d56d0a5616b8e5eb7f56bea7cd",
+      "attribution": {
+        "relationship": "independent_venture",
+        "ownership": "personal",
+        "delivery_attribution": "personal_sole_author",
+        "maturity": "production_released"
+      },
+      "publication": {
+        "default": "deny",
+        "destinations": {
+          "personal_site": "allow",
+          "github_profile": "allow",
+          "cts_marketing": "deny",
+          "cv_export": "allow"
+        }
+      },
+      "verified_claims": [
+        {
+          "claim": "silicon-grounder introduces single-device virtual display coexistence for macOS background automation without mouse cursor hijacking",
+          "value": "Virtual display coexistence without cursor hijacking",
+          "source": "sirsahol/silicon-grounder README.md and commit 8ce4c71",
+          "verified": "2026-11-09"
+        },
+        {
+          "claim": "silicon-grounder enforces sub-5ms warp-and-restore clicks and 60-second idle virtual display lifecycle teardown",
+          "value": "Sub-5ms warp clicks and 60s auto-teardown",
+          "source": "sirsahol/silicon-grounder server.py and test_memory_policy.py",
+          "verified": "2026-11-03"
+        },
+        {
+          "claim": "Native Cocoa floating picture-in-picture window streams background agent canvas at 1-2 FPS without stealing focus",
+          "value": "pip_preview.py 1-2 FPS floating PiP",
+          "source": "sirsahol/silicon-grounder pip_preview.py and test_pip_preview.py",
+          "verified": "2026-11-03"
+        }
+      ]
+    },
+    {
+      "file": "skills-mesh.cgd.md",
+      "title": "Skills Mesh: Zero-Trust Skill Distribution, Verification, and Session Mount Pipeline",
+      "clarity-gate-version": "2.1",
+      "processed-date": "2026-11-03",
+      "clarity-status": "CLEAR",
+      "hitl-status": "REVIEWED",
+      "document-sha256": "cabc8209857925d783315b7e45f5bd0958fc60b21a398126e2d09358abae6602",
+      "attribution": {
+        "relationship": "internal_tooling",
+        "ownership": "personal",
+        "delivery_attribution": "personal_sole_author",
+        "maturity": "production_released"
+      },
+      "publication": {
+        "default": "deny",
+        "destinations": {
+          "personal_site": "allow",
+          "github_profile": "allow",
+          "cts_marketing": "deny",
+          "cv_export": "allow"
+        }
+      },
+      "verified_claims": [
+        {
+          "claim": "skills-mesh maintains 68 vetted skills and 20 capability profiles with manifest.sha256 cryptographic verification",
+          "value": "68 skills, 20 capability profiles, manifest.sha256",
+          "source": "skills-mesh/README.md and commit b77edf9",
+          "verified": "2026-11-03"
+        },
+        {
+          "claim": "skills-mesh creates isolated session mounts with per-skill tree hashes and automated 8-hour TTL pruning",
+          "value": "Per-skill tree hashes + 8h TTL pruning",
+          "source": "skills-mesh/scripts/skills_resolver.py",
+          "verified": "2026-11-03"
+        },
+        {
+          "claim": "skills-mesh logs all resolve mount and prune operations to permissions-hardened JSONL audit files",
+          "value": "Mode 0600 JSONL audit log",
+          "source": "skills-mesh README.md and scripts/skills_resolver.py",
+          "verified": "2026-11-03"
+        }
+      ]
+    },
+    {
+      "file": "social-feedback-engine.cgd.md",
+      "title": "Social Feedback Engine: Autonomous Social Listening, Litestream Replication, and Pragmatic Extraction",
+      "clarity-gate-version": "2.1",
+      "processed-date": "2026-11-03",
+      "clarity-status": "CLEAR",
+      "hitl-status": "REVIEWED",
+      "document-sha256": "f51386134c4b53c789fbbe6e66618256e53aa8246f6bbc21ac8d3456a2452c04",
+      "attribution": {
+        "relationship": "venture_infrastructure",
+        "ownership": "creative_tech_studios",
+        "delivery_attribution": "principal_architect_and_implementer",
+        "maturity": "production_released"
+      },
+      "publication": {
+        "default": "deny",
+        "destinations": {
+          "personal_site": "allow",
+          "github_profile": "allow",
+          "cts_marketing": "allow",
+          "cv_export": "allow"
+        }
+      },
+      "verified_claims": [
+        {
+          "claim": "social-feedback-engine replicates embedded SQLite database continuously to GCS using Litestream WAL synchronization",
+          "value": "SQLite + Litestream GCS continuous WAL sync",
+          "source": "social-feedback-engine config.py and database.py",
+          "verified": "2026-11-03"
+        },
+        {
+          "claim": "social-feedback-engine extracts West African and Nigerian Pidgin colloquialisms using Google ADK and MLX active learning",
+          "value": "Google ADK + MLX active learning for Pidgin",
+          "source": "social-feedback-engine pyproject.toml and commit 72a730e",
+          "verified": "2026-11-03"
+        },
+        {
+          "claim": "social-feedback-engine enforces 5,000,000 token FinOps hard circuit breaker with automated execution tripwire",
+          "value": "5,000,000 token FinOps circuit breaker",
+          "source": "social-feedback-engine AGENTS.md and finops.py",
+          "verified": "2026-11-03"
+        }
+      ]
+    },
+    {
+      "file": "tyfpac-website.cgd.md",
+      "title": "TYFPAC: Civic Engagement and Political Action Committee Web Platform",
+      "clarity-gate-version": "2.1",
+      "processed-date": "2026-11-03",
+      "clarity-status": "CLEAR",
+      "hitl-status": "REVIEWED",
+      "document-sha256": "3fe6daee77cded971c2ec9b6e209c44fb771d64579759c019491d134a2c272f6",
+      "attribution": {
+        "relationship": "client_engagement",
+        "ownership": "client_partner",
+        "delivery_attribution": "principal_architect_and_implementer",
+        "maturity": "production_released"
+      },
+      "publication": {
+        "default": "deny",
+        "destinations": {
+          "personal_site": "allow",
+          "github_profile": "allow",
+          "cts_marketing": "deny",
+          "cv_export": "allow"
+        }
+      },
+      "verified_claims": [
+        {
+          "claim": "tyfpac-website serves civic engagement and political action committee administration",
+          "value": "Civic advocacy & admin platform",
+          "source": "tyfpac-website README.md",
+          "verified": "2026-11-03"
+        },
+        {
+          "claim": "tyfpac-website mounts TanStack Table v8 administrative spoke with isomorphic DOMPurify sanitization",
+          "value": "TanStack Table v8 + DOMPurify",
+          "source": "tyfpac-website commit a1acb99a",
+          "verified": "2026-11-03"
+        },
+        {
+          "claim": "tyfpac-website incorporates Firebase Tools triggers and Playwright testing at commit a1acb99a",
+          "value": "Commit a1acb99a Firebase + Playwright",
+          "source": "tyfpac-website package.json",
+          "verified": "2026-11-03"
+        }
+      ]
+    },
+    {
+      "file": "zynox.cgd.md",
+      "title": "Zynox: Multi-Vertical Media, Cinema, and Talent Platform",
+      "clarity-gate-version": "2.1",
+      "processed-date": "2026-11-03",
+      "clarity-status": "CLEAR",
+      "hitl-status": "REVIEWED",
+      "document-sha256": "b2261ddf683afa281c772955faaf231318aceb646396e7c052d2b21786a48fc4",
+      "attribution": {
+        "relationship": "independent_venture",
+        "ownership": "personal",
+        "delivery_attribution": "principal_architect_and_implementer",
+        "maturity": "production_released"
+      },
+      "publication": {
+        "default": "deny",
+        "destinations": {
+          "personal_site": "allow",
+          "github_profile": "allow",
+          "cts_marketing": "deny",
+          "cv_export": "allow"
+        }
+      },
+      "verified_claims": [
+        {
+          "claim": "zynox unifies music releases cinematic film screenings and editorial journalism on Cloudflare Workers",
+          "value": "Cloudflare Workers multi-vertical media",
+          "source": "Zynox README.md and package.json",
+          "verified": "2026-11-03"
+        },
+        {
+          "claim": "zynox integrates Photon WASM image optimization and Nano Stores persistent state management",
+          "value": "Photon WASM + Nano Stores",
+          "source": "Zynox package.json dependencies",
+          "verified": "2026-11-03"
+        },
+        {
+          "claim": "zynox harmonizes artist roster and cadre settings across SSR and footer at commit c36c4a3",
+          "value": "Commit c36c4a3 roster harmonization",
+          "source": "Zynox git log",
+          "verified": "2026-11-03"
+        }
+      ]
+    }
+  ]
+}

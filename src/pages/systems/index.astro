@@ -1,0 +1,265 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import FloatingContactDock from "../../components/FloatingContactDock.astro";
+import ContactInlet from "../../components/ContactInlet.astro";
+import recordsSummary from "../../data/records-summary.json";
+
+const allProjects = recordsSummary.projects || [];
+
+// Categorize systems
+const edgeMLSlugs = ["mlx-foundry", "silicon-grounder", "ai-benchmark-tracker", "cloud-image-pipeline"];
+const infraSlugs = ["platform-core", "device-mesh", "skills-mesh", "cts-router", "social-feedback-engine"];
+const webAppSlugs = [
+  "faceshift",
+  "cts-website",
+  "queenathmotes-webapp",
+  "podium-empire",
+  "accessphs-webapp",
+  "zynox",
+  "tyfpac-website"
+];
+
+const edgeMLProjects = allProjects.filter((p: any) => edgeMLSlugs.includes(p.file.replace(".cgd.md", "")));
+const infraProjects = allProjects.filter((p: any) => infraSlugs.includes(p.file.replace(".cgd.md", "")));
+const webAppProjects = allProjects.filter((p: any) => webAppSlugs.includes(p.file.replace(".cgd.md", "")));
+
+const liveUrls: Record<string, string> = {
+  "faceshift": "https://streampersona.app",
+  "cts-website": "https://creativetechstudios.org",
+  "queenathmotes-webapp": "https://athmotes.com",
+  "podium-empire": "https://podium-empire.vercel.app",
+  "accessphs-webapp": "https://accessphs-prod.web.app",
+  "zynox": "https://zynox.sirsahol.workers.dev",
+  "tyfpac-website": "https://tyfpac.org",
+};
+---
+
+<BaseLayout
+  title="Systems & Architecture Directory — Saheed Olaide"
+  description="Categorized directory of verified production systems, edge ML runtimes, distributed meshes, and cloud infrastructure."
+>
+  <!-- Edge-to-Edge Systems Header -->
+  <div class="mb-12">
+    <div class="text-sm font-mono text-zinc-500 mb-3">
+      <a href="/" class="hover:text-sky-600 dark:hover:text-sky-400 transition-colors">Home</a>
+      <span class="mx-2">/</span>
+      <span class="text-zinc-700 dark:text-zinc-300">Systems Directory</span>
+    </div>
+
+    <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-6 border-b border-zinc-200 dark:border-zinc-800">
+      <div class="space-y-2">
+        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-100">
+          Systems & Architecture Directory
+        </h1>
+        <p class="text-base sm:text-xl text-zinc-600 dark:text-zinc-400 max-w-4xl leading-relaxed">
+          Empirically verified systems grouped by technical domain. Select any specification to review architectural invariants, system topology, and delivery evidence.
+        </p>
+      </div>
+
+      <!-- Quick Category Jump Links -->
+      <div class="flex flex-wrap items-center gap-3 text-xs sm:text-sm font-mono shrink-0">
+        <a href="#edge-ml" class="px-3.5 py-1.5 rounded-lg bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 hover:text-sky-600 dark:hover:text-sky-400 hover:border-sky-500/50 transition-colors font-medium">
+          01. Edge ML ({edgeMLProjects.length})
+        </a>
+        <a href="#infrastructure" class="px-3.5 py-1.5 rounded-lg bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 hover:text-sky-600 dark:hover:text-sky-400 hover:border-sky-500/50 transition-colors font-medium">
+          02. Infrastructure ({infraProjects.length})
+        </a>
+        <a href="#web-apps" class="px-3.5 py-1.5 rounded-lg bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 hover:text-sky-600 dark:hover:text-sky-400 hover:border-sky-500/50 transition-colors font-medium">
+          03. Web Platforms ({webAppProjects.length})
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Systems Directory (Full Edge-to-Edge Width, Zero Squeeze) -->
+  <div class="w-full space-y-16">
+      <!-- Category 1: Edge ML & Machine Intelligence -->
+      <section id="edge-ml" class="pb-16 border-b border-zinc-200 dark:border-zinc-800 scroll-mt-24">
+    <div class="pb-4 mb-8 border-b border-zinc-200 dark:border-zinc-800 flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
+      <div>
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
+          01. Edge ML & On-Device Intelligence
+        </h2>
+        <p class="text-sm sm:text-base text-zinc-500 mt-1">
+          Unified memory quantization, LiteRT-LM compilation, and local evaluation tooling.
+        </p>
+      </div>
+      <span class="text-xs sm:text-sm font-mono text-zinc-500">{edgeMLProjects.length} Verified Systems</span>
+    </div>
+
+    <div class="divide-y divide-zinc-200 dark:divide-zinc-800/80">
+      {edgeMLProjects.map((proj: any) => {
+        const slug = proj.file.replace(".cgd.md", "");
+        const rawTitle = proj.title || "";
+        const name = rawTitle.includes(":") ? rawTitle.split(":")[0].trim() : rawTitle;
+        const summary = rawTitle.includes(":") ? rawTitle.split(":").slice(1).join(":").trim() : "";
+        const claims = proj.verified_claims || [];
+
+        return (
+          <div class="py-6 first:pt-2 last:pb-2 group">
+            <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 mb-2">
+              <h3 class="text-lg sm:text-xl font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">
+                <a href={`/projects/${slug}`}>
+                  {name}
+                </a>
+              </h3>
+              <a 
+                href={`/projects/${slug}`} 
+                class="font-mono text-sm text-sky-600 dark:text-sky-400 hover:underline inline-flex items-center gap-1 font-semibold"
+              >
+                <span>Read spec</span>
+                <span class="group-hover:translate-x-0.5 transition-transform">→</span>
+              </a>
+            </div>
+
+            {summary && (
+              <p class="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed mb-3 max-w-4xl">
+                {summary}
+              </p>
+            )}
+
+            {claims.length > 0 && (
+              <div class="text-xs sm:text-sm font-mono text-zinc-500 dark:text-zinc-400">
+                Key Invariant: <span class="text-zinc-800 dark:text-zinc-200">{claims[0].value}</span>
+              </div>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  </section>
+
+  <!-- Category 2: Infrastructure & Distributed Meshes -->
+  <section id="infrastructure" class="pb-16 mb-16 border-b border-zinc-200 dark:border-zinc-800 scroll-mt-24">
+    <div class="pb-4 mb-8 border-b border-zinc-200 dark:border-zinc-800 flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
+      <div>
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
+          02. Infrastructure, Device Meshes & Control Planes
+        </h2>
+        <p class="text-sm sm:text-base text-zinc-500 mt-1">
+          Tailscale point-to-point mesh routing, Cloudflare origin shields, and resilient storage synchronization.
+        </p>
+      </div>
+      <span class="text-xs sm:text-sm font-mono text-zinc-500">{infraProjects.length} Verified Systems</span>
+    </div>
+
+    <div class="divide-y divide-zinc-200 dark:divide-zinc-800/80">
+      {infraProjects.map((proj: any) => {
+        const slug = proj.file.replace(".cgd.md", "");
+        const rawTitle = proj.title || "";
+        const name = rawTitle.includes(":") ? rawTitle.split(":")[0].trim() : rawTitle;
+        const summary = rawTitle.includes(":") ? rawTitle.split(":").slice(1).join(":").trim() : "";
+        const claims = proj.verified_claims || [];
+
+        return (
+          <div class="py-6 first:pt-2 last:pb-2 group">
+            <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 mb-2">
+              <h3 class="text-lg sm:text-xl font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">
+                <a href={`/projects/${slug}`}>
+                  {name}
+                </a>
+              </h3>
+              <a 
+                href={`/projects/${slug}`} 
+                class="font-mono text-sm text-sky-600 dark:text-sky-400 hover:underline inline-flex items-center gap-1 font-semibold"
+              >
+                <span>Read spec</span>
+                <span class="group-hover:translate-x-0.5 transition-transform">→</span>
+              </a>
+            </div>
+
+            {summary && (
+              <p class="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed mb-3 max-w-4xl">
+                {summary}
+              </p>
+            )}
+
+            {claims.length > 0 && (
+              <div class="text-xs sm:text-sm font-mono text-zinc-500 dark:text-zinc-400">
+                Key Invariant: <span class="text-zinc-800 dark:text-zinc-200">{claims[0].value}</span>
+              </div>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  </section>
+
+  <!-- Category 3: Web Applications & Deployed Platforms -->
+  <section id="web-apps" class="scroll-mt-24">
+    <div class="pb-4 mb-8 border-b border-zinc-200 dark:border-zinc-800 flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
+      <div>
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
+          03. Web Applications & Deployed Platforms
+        </h2>
+        <p class="text-sm sm:text-base text-zinc-500 mt-1">
+          Verified production web platforms, e-commerce storefronts, healthcare administration, and edge streaming workers.
+        </p>
+      </div>
+      <span class="text-xs sm:text-sm font-mono text-zinc-500">{webAppProjects.length} Verified Platforms</span>
+    </div>
+
+    <div class="divide-y divide-zinc-200 dark:divide-zinc-800/80">
+      {webAppProjects.map((proj: any) => {
+        const slug = proj.file.replace(".cgd.md", "");
+        const rawTitle = proj.title || "";
+        const name = rawTitle.includes(":") ? rawTitle.split(":")[0].trim() : rawTitle;
+        const summary = rawTitle.includes(":") ? rawTitle.split(":").slice(1).join(":").trim() : "";
+        const claims = proj.verified_claims || [];
+        const liveUrl = liveUrls[slug];
+
+        return (
+          <div class="py-6 first:pt-2 last:pb-2 group">
+            <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 mb-2">
+              <div class="flex flex-wrap items-center gap-3">
+                <h3 class="text-lg sm:text-xl font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">
+                  <a href={`/projects/${slug}`}>
+                    {name}
+                  </a>
+                </h3>
+                {liveUrl && (
+                  <a
+                    href={liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="font-mono text-xs sm:text-sm px-2.5 py-1 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:text-sky-600 dark:hover:text-sky-400 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors inline-flex items-center gap-1 font-medium"
+                    title={`Visit live deployment: ${liveUrl}`}
+                  >
+                    <span>{new URL(liveUrl).hostname}</span>
+                    <span>↗</span>
+                  </a>
+                )}
+              </div>
+              <a 
+                href={`/projects/${slug}`} 
+                class="font-mono text-sm text-sky-600 dark:text-sky-400 hover:underline inline-flex items-center gap-1 font-semibold"
+              >
+                <span>Read spec</span>
+                <span class="group-hover:translate-x-0.5 transition-transform">→</span>
+              </a>
+            </div>
+
+            {summary && (
+              <p class="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed mb-3 max-w-4xl">
+                {summary}
+              </p>
+            )}
+
+            {claims.length > 0 && (
+              <div class="text-xs sm:text-sm font-mono text-zinc-500 dark:text-zinc-400">
+                Key Invariant: <span class="text-zinc-800 dark:text-zinc-200">{claims[0].value}</span>
+              </div>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  </section>
+  </div>
+
+  <!-- Full Bottom Inlet Form -->
+  <ContactInlet />
+
+  <!-- Viewport-Streaming Floating Contact Dock (Never squeezes page width) -->
+  <FloatingContactDock />
+</BaseLayout>
