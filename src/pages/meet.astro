@@ -148,50 +148,17 @@ import FloatingContactDock from "../components/FloatingContactDock.astro";
               </select>
             </div>
 
-            <!-- Returning Client Toggle -->
-            <div class="pt-2 flex items-center justify-between text-xs">
-              <button type="button" id="toggle-returning" class="text-zinc-500 dark:text-zinc-400 hover:text-sky-600 dark:hover:text-sky-400 font-mono underline cursor-pointer">
-                Returning client booking a paid 45-min deep dive ($150)?
-              </button>
-            </div>
-
-            <!-- Paid Reference Ingress (Hidden by default) -->
-            <div id="paid-box" class="hidden p-4 rounded-md border border-sky-300 dark:border-sky-800 bg-sky-50/50 dark:bg-sky-950/30 space-y-2">
-              <span class="text-xs font-mono font-semibold text-sky-700 dark:text-sky-300">Paid Advisory Session (45 Min)</span>
-              <p class="text-xs text-zinc-600 dark:text-zinc-400">
-                Subsequent sessions are billed at $150 (₦225,000) via Paystack or Crypto.
-              </p>
-              <div class="flex items-center gap-3 pt-1">
-                <input
-                  type="text"
-                  id="form-paystack-ref"
-                  name="paystack_ref"
-                  placeholder="Paste Paystack Reference (adv_...)"
-                  class="flex-grow px-3 py-2 rounded-md border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-xs font-mono"
-                />
-                <a
-                  href="https://api.creativetechstudios.org/api/v1/billing/checkout/paystack/initialize"
-                  id="paystack-init-btn"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="px-3 py-2 rounded-md bg-sky-600 hover:bg-sky-500 text-white font-mono text-xs font-semibold shrink-0"
-                >
-                  Pay via Paystack ↗
-                </a>
-              </div>
-            </div>
-
             <!-- Action Bar -->
             <div class="pt-3 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <p class="text-xs text-zinc-500 dark:text-zinc-400">
-                Submitting creates an official Google Calendar invite with an attached Google Meet room link.
+                Reserving dispatches a direct briefing confirmation with your Google Meet room link.
               </p>
               <button
                 type="submit"
                 id="submit-booking"
                 class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-md bg-zinc-900 dark:bg-zinc-100 hover:bg-emerald-600 dark:hover:bg-emerald-500 text-white dark:text-zinc-900 dark:hover:text-white text-sm font-mono font-semibold transition-colors cursor-pointer shrink-0"
               >
-                <span>Confirm Complimentary Briefing</span>
+                <span>Confirm Architecture Briefing</span>
                 <span>→</span>
               </button>
             </div>
@@ -208,18 +175,27 @@ import FloatingContactDock from "../components/FloatingContactDock.astro";
             <p class="text-sm text-zinc-700 dark:text-zinc-300" id="confirmed-details">
               <!-- Filled by script -->
             </p>
-            <div class="flex flex-wrap items-center gap-4 pt-2">
+            <div class="flex flex-wrap items-center gap-3 pt-2">
               <a
                 id="confirmed-meet-link"
                 href="#"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-mono font-semibold"
+                class="inline-flex items-center gap-2 px-4 py-2.5 rounded-md bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-mono font-semibold"
               >
                 <span>Open Google Meet Room</span>
                 <span>↗</span>
               </a>
-              <span class="text-xs font-mono text-zinc-500">Check your inbox for calendar attachment</span>
+              <a
+                id="confirmed-gcal-link"
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 px-4 py-2.5 rounded-md border border-emerald-300 dark:border-emerald-700 bg-white dark:bg-zinc-900 text-emerald-800 dark:text-emerald-200 hover:bg-emerald-50 dark:hover:bg-zinc-800 text-xs font-mono font-semibold"
+              >
+                <span>📅 Add to Google Calendar</span>
+                <span>↗</span>
+              </a>
             </div>
           </div>
         </div>
@@ -300,9 +276,9 @@ import FloatingContactDock from "../components/FloatingContactDock.astro";
         </div>
 
         <div class="p-5 rounded-lg border border-zinc-200 dark:border-zinc-800 space-y-2">
-          <h4 class="font-bold text-zinc-900 dark:text-zinc-100">How do paid follow-on sessions work?</h4>
+          <h4 class="font-bold text-zinc-900 dark:text-zinc-100">How do follow-on engineering engagements work?</h4>
           <p class="text-zinc-600 dark:text-zinc-400 leading-relaxed text-xs sm:text-sm">
-            Subsequent 45-minute deep-dive consultations are settled at $150 (₦225,000) through our unified billing rail powered by Paystack or BTC/LTC, verified automatically on booking.
+            Following our initial 20-minute briefing, scoping documents, fractional architecture retainers, or dedicated sprint milestones are tailored directly based on your technical systems requirements.
           </p>
         </div>
       </div>
@@ -313,7 +289,8 @@ import FloatingContactDock from "../components/FloatingContactDock.astro";
   <script is:inline>
     (function () {
       // Configuration
-      const SCRIPT_WEBAPP_URL = ""; // Optional: Enter deployed Apps Script URL if active
+      const NTFY_TOPIC = "sirsahol-ops-briefs-9x7q2m";
+      const SCRIPT_WEBAPP_URL = window.SCRIPT_WEBAPP_URL || "";
       const FALLBACK_MEET_URL = "https://meet.google.com/znh-vypq-rvw";
 
       const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -328,8 +305,7 @@ import FloatingContactDock from "../components/FloatingContactDock.astro";
       const confirmedBox = document.getElementById("booking-confirmed");
       const confirmedDetails = document.getElementById("confirmed-details");
       const confirmedMeetLink = document.getElementById("confirmed-meet-link");
-      const toggleReturning = document.getElementById("toggle-returning");
-      const paidBox = document.getElementById("paid-box");
+      const confirmedGcalLink = document.getElementById("confirmed-gcal-link");
 
       let selectedSlotData = null;
 
@@ -436,14 +412,6 @@ import FloatingContactDock from "../components/FloatingContactDock.astro";
         });
       }
 
-      if (toggleReturning) {
-        toggleReturning.addEventListener("click", () => {
-          if (paidBox) {
-            paidBox.classList.toggle("hidden");
-          }
-        });
-      }
-
       // Handle Booking Submission
       if (bookingForm) {
         bookingForm.addEventListener("submit", async function (e) {
@@ -454,54 +422,88 @@ import FloatingContactDock from "../components/FloatingContactDock.astro";
             submitBtn.textContent = "Reserving Briefing...";
           }
 
-          const name = document.getElementById("form-name").value;
-          const email = document.getElementById("form-email").value;
+          const name = (document.getElementById("form-name").value || "").trim();
+          const email = (document.getElementById("form-email").value || "").trim().toLowerCase();
           const topic = document.getElementById("form-topic").value;
           const slotIso = formSlotIso.value;
-          const paystackRef = document.getElementById("form-paystack-ref") ? document.getElementById("form-paystack-ref").value : "";
-          const isPaid = paidBox && !paidBox.classList.contains("hidden") && paystackRef.length > 0;
+          const meetUrl = FALLBACK_MEET_URL;
 
-          const payload = {
-            name: name,
-            email: email,
-            topic: topic,
-            slot_start: slotIso,
-            tier: isPaid ? "paid_advisory" : "free_intro",
-            paystack_ref: paystackRef
-          };
+          const slotDate = new Date(slotIso);
+          const formattedSlot = slotDate.toLocaleString([], { dateStyle: "full", timeStyle: "short" });
 
-          let success = true;
-          let meetUrl = FALLBACK_MEET_URL;
-
-          // Dispatch to Apps Script Web App if configured
-          if (SCRIPT_WEBAPP_URL) {
+          // 1. Direct Instant Lock-Screen Notification via ntfy.sh (iPhone / Apple Watch / Mac / Android)
+          if (NTFY_TOPIC) {
             try {
-              const res = await fetch(SCRIPT_WEBAPP_URL, {
+              await fetch("https://ntfy.sh", {
                 method: "POST",
-                headers: { "Content-Type": "text/plain;charset=utf-8" },
-                body: JSON.stringify(payload)
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  topic: NTFY_TOPIC,
+                  title: `📅 Architecture Briefing Reserved: ${name}`,
+                  message: `Client: ${name} (${email})\nSlot: ${formattedSlot}\nTopic: ${topic}\nMeet Link: ${meetUrl}`,
+                  priority: 5,
+                  tags: ["calendar", "zap"],
+                  actions: [
+                    {
+                      action: "view",
+                      label: "📹 Open Google Meet",
+                      url: meetUrl
+                    },
+                    {
+                      action: "view",
+                      label: `✉ Email ${name.split(" ")[0]}`,
+                      url: `mailto:${email}?subject=Confirmation:%20Architecture%20Briefing%20with%20Saheed`
+                    }
+                  ]
+                })
               });
-              const json = await res.json();
-              if (json.meet_url) meetUrl = json.meet_url;
             } catch (err) {
-              console.warn("Apps Script dispatch note:", err);
+              console.warn("Direct notification notice:", err);
             }
           }
 
-          // Show Confirmation State
+          // 2. Optional Apps Script Web App Relay
+          if (SCRIPT_WEBAPP_URL) {
+            try {
+              await fetch(SCRIPT_WEBAPP_URL, {
+                method: "POST",
+                headers: { "Content-Type": "text/plain;charset=utf-8" },
+                body: JSON.stringify({
+                  action: "calendar_booking",
+                  name: name,
+                  email: email,
+                  topic: topic,
+                  slot_start: slotIso,
+                  tier: "free_intro"
+                })
+              });
+            } catch (err) {
+              console.warn("Apps Script dispatch notice:", err);
+            }
+          }
+
+          // 3. Construct 1-Click "Add to Google Calendar" link
+          const startIsoCompact = slotDate.toISOString().replace(/-|:|\.\d\d\d/g, "");
+          const endIso = new Date(slotDate.getTime() + 20 * 60 * 1000);
+          const endIsoCompact = endIso.toISOString().replace(/-|:|\.\d\d\d/g, "");
+          const gcalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(`Architecture Briefing — Saheed Olaide & ${name}`)}&dates=${startIsoCompact}/${endIsoCompact}&details=${encodeURIComponent(`Systems Architecture & Technical Advisory Briefing\nPrincipal Systems Architect: Saheed Olaide\nClient: ${name} (${email})\nTopic: ${topic}\n\nGoogle Meet Room: ${meetUrl}`)}&location=${encodeURIComponent(meetUrl)}`;
+
+          // 4. Render Confirmation State
           bookingForm.classList.add("hidden");
           if (confirmedBox) {
             confirmedBox.classList.remove("hidden");
             if (confirmedDetails) {
-              const d = new Date(slotIso);
               confirmedDetails.innerHTML = `
                 Reserved for <strong>${name}</strong> (${email})<br/>
-                Time: <strong>${d.toLocaleString([], { dateStyle: "full", timeStyle: "short" })}</strong><br/>
+                Time: <strong>${formattedSlot}</strong><br/>
                 Scope: <em>${topic}</em>
               `;
             }
             if (confirmedMeetLink) {
               confirmedMeetLink.href = meetUrl;
+            }
+            if (confirmedGcalLink) {
+              confirmedGcalLink.href = gcalUrl;
             }
           }
         });

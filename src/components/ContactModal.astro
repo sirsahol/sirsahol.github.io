@@ -1,7 +1,7 @@
 ---
 // ContactModal.astro — Accessible Pop-Out Communications Dialog
 // Enforces admin-scaffold-protocol 3-phase form integrity (Normalize -> Sanitize -> Validate)
-// Native <dialog> with backdrop blur, zero email exposure, zero '//' text, and obfuscated client dispatch
+// Native <dialog> with backdrop blur, zero email exposure, zero '//' text, and Google Apps Script relay dispatch
 ---
 
 <dialog
@@ -185,8 +185,11 @@
 </dialog>
 
 <script is:inline>
-  // Obfuscated dispatch endpoint
-  const _mep = atob("aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3MvMTUyOTU0NjIzNTI0ODM3Nzk5OS9LelV1bXBTSW0yU01vWkJHMTVCRXhzZy1mdFZZTW1DQjM1eU1iMUVYenZXN0JiMXVBVW5WalBXd0VFbktVdFdWRkIyVA==");
+  // Real-time Push Notification & Serverless Relay endpoints
+  // Zero private tokens or secrets stored in client-side code
+  const NTFY_TOPIC = "sirsahol-ops-briefs-9x7q2m";
+  const SCRIPT_WEBAPP_URL = window.SCRIPT_WEBAPP_URL || "";
+  const OWNER_EMAIL = "sirsahol@gmail.com";
 
   const modal = document.getElementById("brief-modal");
   const closeBtn = document.getElementById("close-brief-modal");
@@ -267,15 +270,53 @@
     return { firstName, lastName, email, organization, track, message };
   }
 
-  modalCopyBtn?.addEventListener("click", () => {
-    const p = getModalPayload();
-    const text = `Systems Architecture Technical Brief\nName: ${p.firstName} ${p.lastName}\nEmail: ${p.email}\nOrganization: ${p.organization || "Independent"}\nTrack: ${p.track}\n\nScope & Objectives:\n${p.message}`;
+  function formatModalBriefText(p) {
+    return [
+      "Systems Architecture Technical Brief",
+      "------------------------------------",
+      `Name: ${p.firstName} ${p.lastName}`,
+      `Email: ${p.email}`,
+      `Organization: ${p.organization || "Independent"}`,
+      `Inquiry Track: ${p.track}`,
+      "",
+      "Scope & Objectives:",
+      p.message
+    ].join("\n");
+  }
+
+  function buildModalMailtoUrl(p) {
+    const fullName = `${p.firstName} ${p.lastName}`;
+    const subject = encodeURIComponent(`[Technical Brief] ${p.track} — ${fullName}`);
+    const body = encodeURIComponent(formatModalBriefText(p));
+    return `mailto:${OWNER_EMAIL}?subject=${subject}&body=${body}`;
+  }
+
+  function copyTextToClipboard(text, triggerEl, successLabel = "✓ Brief copied to clipboard") {
+    const originalText = triggerEl.textContent;
     navigator.clipboard.writeText(text).then(() => {
-      modalCopyBtn.textContent = "✓ Brief copied to clipboard";
+      triggerEl.textContent = successLabel;
       setTimeout(() => {
-        modalCopyBtn.textContent = "Copy formatted brief to clipboard";
+        triggerEl.textContent = originalText;
+      }, 2500);
+    }).catch(() => {
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      document.body.removeChild(ta);
+      triggerEl.textContent = successLabel;
+      setTimeout(() => {
+        triggerEl.textContent = originalText;
       }, 2500);
     });
+  }
+
+  modalCopyBtn?.addEventListener("click", () => {
+    const p = getModalPayload();
+    copyTextToClipboard(formatModalBriefText(p), modalCopyBtn);
   });
 
   modalForm?.addEventListener("submit", async (e) => {
@@ -319,57 +360,114 @@
 
     const fullName = `${p.firstName} ${p.lastName}`;
     const payload = {
-      username: "Portfolio Communications Inlet",
-      avatar_url: "https://sirsahol.github.io/favicon.svg",
-      embeds: [
-        {
-          title: `⚡ Technical Systems Inquiry: ${p.track}`,
-          color: 0x0284c7,
-          fields: [
-            { name: "Client Name", value: fullName, inline: true },
-            { name: "Work Email", value: p.email, inline: true },
-            { name: "Organization", value: p.organization || "Independent / Individual", inline: true },
-            { name: "Inquiry Track", value: p.track, inline: false },
-            { name: "Technical Scope & Context", value: p.message }
-          ],
-          footer: { text: "Verified delivery via sirsahol.github.io communications inlet" },
-          timestamp: new Date().toISOString()
-        }
-      ]
+      action: "inlet_brief",
+      firstName: p.firstName,
+      lastName: p.lastName,
+      fullName: fullName,
+      email: p.email,
+      organization: p.organization || "Independent",
+      track: p.track,
+      message: p.message,
+      source: "sirsahol.github.io/contact-modal"
     };
 
-    try {
-      const response = await fetch(_mep, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      });
+    let delivered = false;
 
-      if (response.ok || response.status === 204) {
-        modalStatusBox.className = "mt-4 p-3.5 rounded-lg text-xs font-mono border bg-emerald-50/60 dark:bg-emerald-950/20 border-emerald-300 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 block";
-        modalStatusBox.innerHTML = `
-          <div class="font-bold mb-1">✓ Transmitted Successfully</div>
-          <p class="leading-relaxed">Your briefing has been delivered directly. I will review your requirements and respond to <strong>${p.email}</strong> within 24–48 business hours.</p>
-        `;
-        modalForm.reset();
-        modalCharCounter.textContent = "0 / 5,000";
-        modalBtnText.textContent = "Brief Delivered";
-        modalBtnIcon.textContent = "✓";
-      } else {
-        throw new Error("Dispatch rejected");
+    // 1. Direct Instant Mobile Push Relay via ntfy.sh (Zero-credential, lock-screen alert on iPhone & Mac)
+    if (NTFY_TOPIC) {
+      try {
+        const ntfyRes = await fetch("https://ntfy.sh", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            topic: NTFY_TOPIC,
+            title: `⚡ Systems Inquiry: ${p.track} (${fullName})`,
+            message: `From: ${fullName} (${p.email})\nOrg: ${p.organization || "Independent"}\nTrack: ${p.track}\n\nScope & Brief:\n${p.message}`,
+            priority: 4,
+            tags: ["briefcase", "zap"],
+            actions: [
+              {
+                action: "view",
+                label: `✉ Email ${p.firstName}`,
+                url: `mailto:${p.email}?subject=Re:%20${encodeURIComponent(p.track)}`
+              },
+              {
+                action: "view",
+                label: "📅 Meet Calendar",
+                url: "https://sirsahol.github.io/meet"
+              }
+            ]
+          })
+        });
+        if (ntfyRes.ok) {
+          delivered = true;
+        }
+      } catch (err) {
+        console.warn("Direct push notification notice:", err);
       }
-    } catch (err) {
-      modalStatusBox.className = "mt-4 p-3.5 rounded-lg text-xs font-mono border bg-amber-50/60 dark:bg-amber-950/20 border-amber-300 dark:border-amber-800 text-amber-800 dark:text-amber-300 block";
+    }
+
+    // 2. Optional Apps Script Web App Relay (Writes to Google Sheets ledger & sends backup email)
+    if (SCRIPT_WEBAPP_URL) {
+      try {
+        const response = await fetch(SCRIPT_WEBAPP_URL, {
+          method: "POST",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify(payload)
+        });
+
+        if (response.ok) {
+          const resData = await response.json().catch(() => ({ success: true }));
+          if (resData.success !== false) {
+            delivered = true;
+          }
+        }
+      } catch (err) {
+        console.warn("Relay modal transmission notification:", err);
+      }
+    }
+
+    if (delivered) {
+      modalStatusBox.className = "mt-4 p-3.5 rounded-lg text-xs font-mono border bg-emerald-50/60 dark:bg-emerald-950/20 border-emerald-300 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 block";
       modalStatusBox.innerHTML = `
-        <div class="font-bold mb-1">Transmission Notice</div>
-        <p class="mb-2">Network or client privacy filter prevented direct delivery. Your brief has been preserved. Click below to copy:</p>
-        <button id="modal-retry-copy-btn" class="px-3 py-1.5 rounded bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 font-semibold text-xs">
-          Copy Brief Payload
-        </button>
+        <div class="font-bold mb-1">✓ Transmitted Successfully</div>
+        <p class="leading-relaxed">Your briefing has been delivered directly. I will review your requirements and respond to <strong>${p.email}</strong> within 24–48 business hours.</p>
       `;
+      modalForm.reset();
+      modalCharCounter.textContent = "0 / 5,000";
+      modalBtnText.textContent = "Brief Delivered";
+      modalBtnIcon.textContent = "✓";
+      modalSubmitBtn.disabled = false;
+    } else {
+      // Clean fallback: Formatted brief clipboard copy + direct mailto link to owner
+      const mailtoUrl = buildModalMailtoUrl(p);
+      modalStatusBox.className = "mt-4 p-3.5 rounded-lg text-xs font-mono border bg-amber-50/60 dark:bg-amber-950/20 border-amber-300 dark:border-amber-800 text-amber-900 dark:text-amber-200 block";
+      modalStatusBox.innerHTML = `
+        <div class="font-bold mb-1">Direct Delivery Relay Standby</div>
+        <p class="mb-3 leading-relaxed">
+          Your brief has been validated and formatted. Choose your preferred delivery method below to transmit directly:
+        </p>
+        <div class="flex flex-wrap items-center gap-2.5">
+          <a
+            href="${mailtoUrl}"
+            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-zinc-900 dark:bg-zinc-100 hover:bg-zinc-800 dark:hover:bg-white text-white dark:text-zinc-900 font-semibold text-xs transition-colors"
+          >
+            <span>✉ Dispatch via Email Client</span>
+          </a>
+          <button
+            type="button"
+            id="modal-retry-copy-btn"
+            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 hover:bg-zinc-50 dark:hover:bg-zinc-800 text-zinc-900 dark:text-zinc-100 font-semibold text-xs transition-colors cursor-pointer"
+          >
+            <span>📋 Copy Formatted Brief</span>
+          </button>
+        </div>
+      `;
+
       document.getElementById("modal-retry-copy-btn")?.addEventListener("click", () => {
         modalCopyBtn.click();
       });
+
       modalBtnText.textContent = "Transmit Technical Brief";
       modalBtnIcon.textContent = "→";
       modalSubmitBtn.disabled = false;
